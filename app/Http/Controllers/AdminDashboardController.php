@@ -12,9 +12,15 @@ use PhpParser\Builder\Class_;
 
 class AdminDashboardController extends Controller
 {   
-    public function getUser() {
-        $userID = auth()->user()->id;
-        return User::find($userID);
+    // public function getUser() {
+    //     $userID = auth()->user()->id;
+    //     return User::find($userID);
+    // }
+
+    public function getRoleName($id) {
+        if ($id === 1) return 'Admin';
+        if ($id === 2) return 'Student';
+        if ($id === 3) return 'Teacher'; 
     }
 
     public function index()
@@ -29,7 +35,7 @@ class AdminDashboardController extends Controller
                 $record->name,
                 $record->username,
                 $record->email,
-                $record->role,
+                $this->getRoleName($record->role),
                 $record->faculty_id
             ]);
         }

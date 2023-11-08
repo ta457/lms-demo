@@ -3,8 +3,9 @@
 'data' => $props['data']
 ])
 
-<section class="bg-gray-100 dark:bg-gray-900 sm:p-0 col-span-4">
-  <div class="mx-auto max-w-screen-xl px-4 lg:px-0">
+<section class="bg-white dark:bg-gray-900 sm:p-0 col-span-4">
+  {{-- <div class="mx-auto max-w-screen-xl px-4 lg:px-0"> --}}
+  <div class="w-full px-4 lg:px-0">
     <!-- Start coding here -->
     <div class="pt-10 bg-white dark:bg-gray-800 relative overflow-hidden">
       <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -28,7 +29,7 @@
         </div>
         <div
           class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-          <button type="button"
+          <button type="button" id="defaultModalButton" data-modal-toggle="defaultModal"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true">
@@ -138,9 +139,9 @@
             @foreach ($data as $record)
             <tr class="border-b dark:border-gray-700">
               @foreach ($record as $key => $value)
-                {{-- <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{ $value }}</th> --}}
-                <td class="px-4 py-3">{{ $value }}</td>
+              {{-- <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ $value }}</th> --}}
+              <td class="px-4 py-3">{{ $value }}</td>
               @endforeach
               <td class="px-4 py-3 flex items-center justify-end">
                 <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
@@ -177,8 +178,8 @@
           </tbody>
         </table>
       </div>
-      <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-        aria-label="Table navigation">
+      <nav class="bottom-0 fixed flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+        aria-label="Table navigation" style="width:66.67vw !important;">
         <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
           Showing
           <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
@@ -235,3 +236,6 @@
     </div>
   </div>
 </section>
+
+<!-- Main modal -->
+<x-modal-addUser />

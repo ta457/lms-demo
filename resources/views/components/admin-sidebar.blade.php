@@ -2,7 +2,7 @@
   class="left-0 w-full transition-transform -translate-x-full sm:translate-x-0"
   aria-label="Sidenav">
   <div
-    class="overflow-y-auto pt-20 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    class="overflow-y-auto pt-20 px-3 h-full bg-gray-100 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <ul class="space-y-2">
 
       {{ $slot }}
@@ -45,7 +45,7 @@
     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
       <li>
         <a href="#"
-          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-white dark:hover:bg-gray-700 dark:text-white group">
           <svg aria-hidden="true"
             class="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -57,9 +57,9 @@
           <span class="ml-3">Docs</span>
         </a>
       </li>
-      <li>
+      {{-- <li>
         <a href="#"
-          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-white dark:hover:bg-gray-700 dark:text-white group">
           <svg aria-hidden="true"
             class="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -69,10 +69,10 @@
           </svg>
           <span class="ml-3">Components</span>
         </a>
-      </li>
+      </li> --}}
       <li>
         <a href="#"
-          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-white dark:hover:bg-gray-700 dark:text-white group">
           <svg aria-hidden="true"
             class="flex-shrink-0 w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
