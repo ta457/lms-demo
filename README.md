@@ -20,7 +20,3 @@
 9. php artisan serve
 10. Mở một cửa sổ Terminal khác, chạy npm run dev
 11. Vào localhost:8000
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
