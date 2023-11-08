@@ -1,4 +1,6 @@
-<section class="bg-gray-100 dark:bg-gray-900 sm:p-0 col-span-4">
+@props(['user'])
+
+<section class="{{ $user->role != 1 ? 'hidden' : '' }} bg-gray-100 dark:bg-gray-900 sm:p-0 col-span-4">
   <div class="mx-auto max-w-screen-xl px-4 lg:px-0">
     <!-- Start coding here -->
     <div class="pt-10 bg-white dark:bg-gray-800 relative overflow-hidden">
