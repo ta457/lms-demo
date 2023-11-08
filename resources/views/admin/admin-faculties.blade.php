@@ -1,15 +1,8 @@
 <x-app-layout>
-    @if ($user->role != 1)
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('My courses') }}
-        </h2>
-    </x-slot>
-    @endif
 
-    <div class="{{ $user->role == 1 ? 'grid lg:grid-cols-6 h-screen' : 'py-12' }}">
+  <div class="grid lg:grid-cols-6 h-screen">
 
-        <x-admin-sidebar :user="$user">
+        <x-admin-sidebar>
             <li>
                 <a href="/admin-dashboard/users"
                     class="
@@ -64,6 +57,6 @@
               </li>
         </x-admin-sidebar>
 
-        <x-admin-table :user="$user" />
+        <x-admin-table :props="$props" />
     </div>
 </x-app-layout>

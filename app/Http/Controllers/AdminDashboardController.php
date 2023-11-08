@@ -1,64 +1,105 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Course;
+use App\Models\CourseClass;
+use App\Models\Faculty;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+use PhpParser\Builder\Class_;
 
 class AdminDashboardController extends Controller
-{
+{   
+    public function getUser() {
+        $userID = auth()->user()->id;
+        return User::find($userID);
+    }
+
     public function index()
-    {
-        $user_id = auth()->user()->id;
+    {   
+        $records = User::get();
+        $columns = ['id','name','username','email','role','faculty_id'];
+        $data = [];
 
-        $user = User::find($user_id);
+        foreach ($records as $record) {
+            $data[] = array_combine($columns, [
+                $record->id,
+                $record->name,
+                $record->username,
+                $record->email,
+                $record->role,
+                $record->faculty_id
+            ]);
+        }
 
-        $classes = $user->classes;
+        $props = ['columns' => $columns, 'data' => $data];
 
         return view('admin.admin-users', [
-            'classes' => $classes,
-            'user' => $user
+            'props' => $props
         ]);
     }
 
     public function faculties()
     {
-        $user_id = auth()->user()->id;
+        $records = Faculty::get();
+        $columns = ['id','faculty_name'];
+        $data = [];
 
-        $user = User::find($user_id);
+        foreach ($records as $record) {
+            $data[] = array_combine($columns, [
+                $record->id,
+                $record->faculty_name
+            ]);
+        }
 
-        $classes = $user->classes;
+        $props = ['columns' => $columns, 'data' => $data];
 
         return view('admin.admin-faculties', [
-            'classes' => $classes,
-            'user' => $user
+            'props' => $props
         ]);
     }
 
     public function courses()
     {
-        $user_id = auth()->user()->id;
+        $records = Course::get();
+        $columns = ['id','course_name', 'faculty_id'];
+        $data = [];
 
-        $user = User::find($user_id);
+        foreach ($records as $record) {
+            $data[] = array_combine($columns, [
+                $record->id,
+                $record->course_name,
+                $record->faculty_id
+            ]);
+        }
 
-        $classes = $user->classes;
+        $props = ['columns' => $columns, 'data' => $data];
 
         return view('admin.admin-courses', [
-            'classes' => $classes,
-            'user' => $user
+            'props' => $props
         ]);
     }
 
     public function classes()
     {
-        $user_id = auth()->user()->id;
+        $records = CourseClass::get();
+        $columns = ['id','class_name', 'course_id'];
+        $data = [];
 
-        $user = User::find($user_id);
+        foreach ($records as $record) {
+            $data[] = array_combine($columns, [
+                $record->id,
+                $record->class_name,
+                $record->course_id
+            ]);
+        }
 
-        $classes = $user->classes;
+        $props = ['columns' => $columns, 'data' => $data];
 
         return view('admin.admin-classes', [
-            'classes' => $classes,
-            'user' => $user
+            'props' => $props
         ]);
     }
 }
