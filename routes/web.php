@@ -40,26 +40,69 @@ Route::get('/dashboard',
     [DashboardController::class, 'index']
 )->middleware(['auth', 'verified'])->name('dashboard');
 
-//when open admin-dashboard, call admin() method of the controller
-Route::get('/admin-dashboard', function() {
-    return redirect('/admin-dashboard/users');
-})->middleware(['admin']);
+//admin-dashboard routes
+Route::middleware('admin')->group(function () {
+    Route::get('/admin-dashboard', function() {
+        return redirect('/admin-dashboard/users');
+    });
+    Route::get('/admin-dashboard/users', 
+        [AdminDashboardController::class, 'users']
+    );
+    Route::post('/admin-dashboard/users', 
+        [AdminDashboardController::class, 'storeUser']
+    );
+    Route::delete('/admin-dashboard/users/{user}', 
+        [AdminDashboardController::class, 'destroyUser']
+    );
+    Route::get('/admin-dashboard/users/{user}/edit', 
+        [AdminDashboardController::class, 'editUser']
+    );
+    Route::patch('/admin-dashboard/users/{user}', 
+        [AdminDashboardController::class, 'updateUser']
+    );
 
-Route::get('/admin-dashboard/users', 
-    [AdminDashboardController::class, 'index']
-)->middleware(['admin'])->name('adminUsers');
+    Route::get('/admin-dashboard/faculties', 
+        [AdminDashboardController::class, 'faculties']
+    );
+    Route::post('/admin-dashboard/faculties', 
+        [AdminDashboardController::class, 'storeFaculty']
+    );
+    Route::delete('/admin-dashboard/faculties/{faculty}', 
+        [AdminDashboardController::class, 'destroyFaculty']
+    );
+    Route::get('/admin-dashboard/faculties/{faculty}/edit', 
+        [AdminDashboardController::class, 'editFaculty']
+    );
+    Route::patch('/admin-dashboard/faculties/{faculty}', 
+        [AdminDashboardController::class, 'updateFaculty']
+    );
 
-Route::get('/admin-dashboard/faculties', 
-    [AdminDashboardController::class, 'faculties']
-)->middleware(['admin'])->name('adminFaculties');
+    Route::get('/admin-dashboard/courses', 
+        [AdminDashboardController::class, 'courses']
+    );
+    Route::post('/admin-dashboard/courses', 
+        [AdminDashboardController::class, 'storeCourse']
+    );
+    Route::delete('/admin-dashboard/courses/{course}', 
+        [AdminDashboardController::class, 'destroyCourse']
+    );
+    Route::get('/admin-dashboard/courses/{course}/edit', 
+        [AdminDashboardController::class, 'editCourse']
+    );
+    Route::patch('/admin-dashboard/courses/{course}', 
+        [AdminDashboardController::class, 'updateCourse']
+    );
 
-Route::get('/admin-dashboard/courses', 
-    [AdminDashboardController::class, 'courses']
-)->middleware(['admin'])->name('adminCourses');
-
-Route::get('/admin-dashboard/classes', 
-    [AdminDashboardController::class, 'classes']
-)->middleware(['admin'])->name('adminClasses');
+    Route::get('/admin-dashboard/classes', 
+        [AdminDashboardController::class, 'classes']
+    );
+    Route::post('/admin-dashboard/classes', 
+        [AdminDashboardController::class, 'storeClass']
+    );
+    Route::delete('/admin-dashboard/classes/{class}', 
+        [AdminDashboardController::class, 'destroyClass']
+    );
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

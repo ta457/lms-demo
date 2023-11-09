@@ -1,3 +1,8 @@
+@props([
+  'faculties' => $props['faculties']
+])
+
+
 <div id="defaultModal" tabindex="-1" aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
   <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -21,7 +26,8 @@
         </button>
       </div>
       <!-- Modal body -->
-      <form action="" method="POST">
+      <form action="/admin-dashboard/users" method="POST">
+        @csrf
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
           <div>
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
@@ -54,19 +60,18 @@
               placeholder="$2999" required="">
           </div> --}}
           <div>
-            <label for="faculty" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Faculty</label>
-            <select id="faculty"
+            <label for="faculty_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Faculty</label>
+            <select id="faculty_id" name="faculty_id"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
               <option selected="">Select faculty</option>
-              <option value="TV">TV/Monitors</option>
-              <option value="PC">PC</option>
-              <option value="GA">Gaming/Console</option>
-              <option value="PH">Phones</option>
+              @foreach ($faculties as $f)
+                <option value="{{ $f->id }}">{{ $f->faculty_name }}</option>         
+              @endforeach
             </select>
           </div>
           <div>
             <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-            <select id="role"
+            <select id="role" name="role"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
               <option selected="">Select role</option>
               <option value="2">Student</option>

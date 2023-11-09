@@ -10,7 +10,7 @@
 ## Cài đặt
 
 1. Cài Laragon, mở Terminal
-2. git clone git@github.com:ta457/lms-demo.git
+2. git clone https://github.com/ta457/lms-demo.git
 3. cd lms*
 4. composer install
 5. cp .env.example .env
