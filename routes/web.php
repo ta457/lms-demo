@@ -102,6 +102,12 @@ Route::middleware('admin')->group(function () {
     Route::delete('/admin-dashboard/classes/{class}', 
         [AdminDashboardController::class, 'destroyClass']
     );
+    Route::get('/admin-dashboard/classes/{class}/edit', 
+        [AdminDashboardController::class, 'editClass']
+    );
+    Route::patch('/admin-dashboard/classes/{class}', 
+        [AdminDashboardController::class, 'updateClass']
+    );
 });
 
 Route::middleware('auth')->group(function () {
