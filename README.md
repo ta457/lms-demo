@@ -9,15 +9,16 @@
 
 ## Cài đặt
 
-1. Cài Laragon, mở Terminal
-2. git clone https://github.com/ta457/lms-demo.git
-3. cd lms*
-4. composer install
-5. cp .env.example .env
-6. php artisan key:generate
-7. php artisan migrate
-8. php artisan db:seed
-9. npm install
-10. php artisan serve
-11. Mở một cửa sổ Terminal khác, chạy npm run dev
-12. Vào localhost:8000
+1. Cài Laragon
+2. Mở Laragon, chọn Start All, xong chọn Terminal
+3. Chạy lệnh: git clone https://github.com/ta457/lms-demo.git
+4. Chạy lệnh: cd lms*
+5. Chạy lệnh: composer install
+6. Chạy lệnh: cp .env.example .env
+7. Chạy lệnh: php artisan key:generate
+8. Chạy lệnh: php artisan migrate
+9. Chạy lệnh: php artisan db:seed
+10. Chạy lệnh: npm install
+11. Chạy lệnh: php artisan serve
+12. Mở một cửa sổ Terminal khác (click dấu + màu xanh ở góc trái Terminal), chạy lệnh npm run dev
+13. Vào localhost:8000
