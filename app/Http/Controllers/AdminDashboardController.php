@@ -41,7 +41,7 @@ class AdminDashboardController extends Controller
                 $faculties->where('id', $record->faculty_id)->first()->faculty_name ?? 'NULL'
             ]);
         }
-        array_shift($data);
+        //$admin = array_shift($data);
         $props = [
             'columns' => $columns, 
             'data' => $data, 

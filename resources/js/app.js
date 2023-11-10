@@ -8,11 +8,15 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-//create
+//create item modal
 document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById('defaultModalButton').click();
 });
 
+//confirm delete item modal
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById('deleteButton').click();
+});
 
 // document.addEventListener('DOMContentLoaded', function() {
 //   let i = 1;
