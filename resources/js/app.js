@@ -53,14 +53,11 @@ searchBar.addEventListener('input', function () {
 
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 const header = document.getElementById('class-members-header');
-function updateH1Text() {
-  header.textContent = "You've hit the checkbox";
-}
 checkboxes.forEach(checkbox => {
-  checkbox.addEventListener('change', () => {
-    if (checkbox.checked) {
-      header.textContent = "Class members changed. Please Update!";
+  checkbox.addEventListener('click', () => {
+    // if (checkbox.checked) {
+      header.textContent = "Class members changed! Click Update to apply.";
       header.classList.add('text-rose-400');
-    }
+    //}
   });
 });
