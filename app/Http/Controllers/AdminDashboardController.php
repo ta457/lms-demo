@@ -262,6 +262,7 @@ class AdminDashboardController extends Controller
             'class' => $class,
             'courses' => Course::get(),
             'faculties' => Faculty::get(),
+            'users' => User::get(),
             'members' => $class->members
         ];
         return view('admin.edit-class', [
@@ -275,7 +276,14 @@ class AdminDashboardController extends Controller
             'class_name' => 'required|max:255',
             'course_id' => 'required',
         ]);
+        $selected = request()->input('update-members', []);
+        $this->updateClassMembers($class, $selected);
         $class->update($attributes);
         return redirect('/admin-dashboard/classes');
+    }
+
+    public function updateClassMembers($class, $memberList)
+    {
+        $class->members()->sync($memberList);
     }
 }

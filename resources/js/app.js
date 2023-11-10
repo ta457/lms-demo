@@ -9,79 +9,58 @@ window.Alpine = Alpine;
 Alpine.start();
 
 //create item modal
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById('defaultModalButton').click();
 });
 
 //confirm delete item modal
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById('deleteButton').click();
 });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   let i = 1;
-//   let button = document.getElementById('admin-action-dropdown-btn-' + i);
-//   while (button) {
-//     let divToHide = document.getElementById('admin-action-dropdown-' + i);
-//     button.addEventListener('click', function() {
-//       event.stopPropagation()
-//       divToHide.classList.remove('hidden');
-//       divToHide.classList.add('absolute');
-//     });
+//add member to class - dynamically search ----------=================================
+// Get the input element
+const searchBar = document.getElementById('class-search-user');
+// Add an event listener for input changes
+searchBar.addEventListener('input', function () {
+  // Get the input value
+  const inputValue = searchBar.value.toLowerCase();
 
-//     i++;
-//     button = document.getElementById('admin-action-dropdown-btn-' + i);
-//   }
-  
-//   document.addEventListener('click', function (event) {
-//     const buttons = Array.from(document.querySelectorAll('[id^="admin-action-dropdown-btn-"]'));
-//     const divs = Array.from(document.querySelectorAll('[id^="admin-action-dropdown-"]'));
-//     if (!buttons.includes(event.target) && !divs.includes(event.target)) {
-//       divs.forEach(div => div.classList.add('hidden'));
-//     }
-//   });
+  // Get all list items
+  const listItems = document.querySelectorAll('tbody tr[id^="class-search-user-result-"]');
 
-// });
+  // Loop through each list item
+  listItems.forEach(function (item) {
+    // Get the text content of the list item
+    const itemText = item.textContent.toLowerCase();
+    // Check if the input value is empty
+    if (inputValue === '') {
+      // If empty, add the 'hidden' class
+      item.classList.add('hidden');
+    } else {
+      // If not empty, check if the item text contains the input value
+      if (itemText.includes(inputValue)) {
+        // If it does, remove the 'hidden' class
+        item.classList.remove('hidden');
+      } else {
+        // If it doesn't, add the 'hidden' class
+        item.classList.add('hidden');
+      }
+    }
+  });
+});
+//===================================================================================
 
-// function fillUpdateModal(id) {
-//   const header = document.getElementById('update-header');
-//   header.textContent = "Update record of ID = " + id;
-
-//   const row = document.getElementById('user-' + id);
-//   const tdElements = row.querySelectorAll('td');
-//   const tdValues = Array.from(tdElements).map(td => td.textContent);
-//   tdValues.shift();
-//   tdValues.pop();
-//   console.log(tdValues);
-
-//   const fields = ['updateUser-name','updateUser-username','updateUser-email','updateUser-role','updateUser-faculty_id'];
-//   fields.forEach((field, index) => {
-//     const element = document.getElementById(field);
-//     element.value = tdValues[index];
-//   });
-
-//   const deleteForm = document.getElementById('deleteUser');
-//   deleteForm.setAttribute('action','/admin-dashboard/users/' + id);
-// }
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   // Get the hidden button
-//   const realButton = document.getElementById('updateProductButton');
-
-//   // Get all the visible buttons
-//   const visibleButtons = document.querySelectorAll('[id^="triggerUpdateBtn-"]');
-
-//   // Add a click event listener to each visible button
-//   visibleButtons.forEach(function(button) {
-//     button.addEventListener('click', function() {
-//       // Extract x from the button's ID
-//       const x = button.id.split('-')[1];
-//       console.log('Button with x =', x, 'clicked');
-
-//       // Trigger a click event on the hidden button
-//       realButton.click();
-
-//       fillUpdateModal(x);
-//     });
-//   });
-// });
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const header = document.getElementById('class-members-header');
+function updateH1Text() {
+  header.textContent = "You've hit the checkbox";
+}
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      header.textContent = "Class members changed. Please Update!";
+      header.classList.add('text-rose-400');
+    }
+  });
+});
