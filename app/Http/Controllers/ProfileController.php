@@ -32,7 +32,9 @@ class ProfileController extends Controller
             'email' => 'email|max:255',
             'avatar' => 'image'
         ]);
-        $attributes['avatar'] = request()->file('avatar')->store('avatar');
+        if ($request->avatar) {
+            $attributes['avatar'] = request()->file('avatar')->store('avatar');
+        }
 
         if(Auth::user()->avatar) {
             Storage::delete(Auth::user()->avatar);
