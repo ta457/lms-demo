@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,10 @@ class ProfileController extends Controller
             'avatar' => 'image'
         ]);
         $attributes['avatar'] = request()->file('avatar')->store('avatar');
+
+        if(Auth::user()->avatar) {
+            Storage::delete(Auth::user()->avatar);
+        }
 
         $request->user()->fill($attributes);
 

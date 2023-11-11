@@ -3,7 +3,10 @@
     @csrf
     @method('PATCH')
     <div class="grid lg:grid-cols-6 h-screen">
+      
       <x-modal-editClass :props="$props"/>
+      <x-delete-modal :props="$props" />
+
     </div>
   </form>
 </x-app-layout>

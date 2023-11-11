@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
+        
+        $default = Faculty::create([
+            'faculty_name' => 'Unassigned'
+        ]);
         $itFac = Faculty::create([
             'faculty_name' => 'Công nghệ thông tin'
         ]);
@@ -37,7 +40,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => '12345678',
-            'role' => 1
+            'role' => 1,
+            'faculty_id' => $default->id
         ]);
         $student1 = User::create([
             'username' => 'student1',

@@ -51,6 +51,7 @@ searchBar.addEventListener('input', function () {
 });
 //===================================================================================
 
+//========handling class members edit ========================================
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 const header = document.getElementById('class-members-header');
 checkboxes.forEach(checkbox => {

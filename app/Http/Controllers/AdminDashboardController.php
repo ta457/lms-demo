@@ -7,13 +7,13 @@ use App\Models\CourseClass;
 use App\Models\Faculty;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rule;
 use PhpParser\Builder\Class_;
 
 class AdminDashboardController extends Controller
 {   
-
     public function users()
     {   
         $columns = ['id','name','username','email','role_name','faculty_name'];
@@ -48,7 +48,9 @@ class AdminDashboardController extends Controller
     public function editUser(User $user) {
         $props = [
             'user' => $user,
-            'faculties' => Faculty::get()
+            'delete' => $user,
+            'faculties' => Faculty::get(),
+            'url' => '/admin-dashboard/users'
         ];
         return view('admin.edit-user', [
             'props' => $props
@@ -73,6 +75,7 @@ class AdminDashboardController extends Controller
     public function destroyUser(User $user)
     {
         if($user->role !== 1) {
+            DB::delete('delete from class_members where user_id=?', [$user->id]);
             $user->delete();
         }
         return redirect('/admin-dashboard/users');
@@ -102,7 +105,9 @@ class AdminDashboardController extends Controller
 
     public function editFaculty(Faculty $faculty) {
         $props = [
-            'faculty' => $faculty
+            'faculty' => $faculty,
+            'delete' => $faculty,
+            'url' => '/admin-dashboard/faculties'
         ];
         return view('admin.edit-faculty', [
             'props' => $props
@@ -114,12 +119,15 @@ class AdminDashboardController extends Controller
         $attributes = request()->validate([
             'faculty_name' => 'required|max:255'
         ]);
-        $faculty->update($attributes);
+        if ($faculty->id != 1) {
+            $faculty->update($attributes);
+        }
         return redirect('/admin-dashboard/faculties');
     }
 
     public function destroyFaculty(Faculty $faculty)
     {
+        DB::delete('update courses set faculty_id = 1 where faculty_id = ?', [$faculty->id]);
         $faculty->delete();
         return redirect('/admin-dashboard/faculties');
     }
@@ -151,7 +159,9 @@ class AdminDashboardController extends Controller
     public function editCourse(Course $course) {
         $props = [
             'course' => $course,
+            'delete' => $course,
             'faculties' => Faculty::Get(),
+            'url' => '/admin-dashboard/courses'
         ];
         return view('admin.edit-course', [
             'props' => $props
@@ -168,14 +178,14 @@ class AdminDashboardController extends Controller
     }
 
     public function destroyCourse(Course $course)
-    {
+    {   
+        DB::delete('delete from course_classes where course_id=?', [$course->id]);
         $course->delete();
         return redirect('/admin-dashboard/courses');
     }
 
     public function classes()
     {
-        $courses = Course::get();
         $columns = ['id','class_name', 'course_name'];
         $props = [
             'columns' => $columns, 
@@ -199,7 +209,8 @@ class AdminDashboardController extends Controller
     }
 
     public function destroyClass(CourseClass $class)
-    {
+    {   
+        DB::delete('delete from class_members where class_id=?', [$class->id]);
         $class->delete();
         return redirect('/admin-dashboard/classes');
     }
@@ -207,10 +218,12 @@ class AdminDashboardController extends Controller
     public function editClass (CourseClass $class) {
         $props = [
             'class' => $class,
+            'delete' => $class,
             'courses' => Course::get(),
             'faculties' => Faculty::get(),
             'users' => User::get(),
-            'members' => $class->members()->paginate(10)
+            'members' => $class->members()->paginate(10),
+            'url' => '/admin-dashboard/classes'
         ];
         return view('admin.edit-class', [
             'props' => $props
