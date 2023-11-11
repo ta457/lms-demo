@@ -51,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(CourseClass::class, 'class_members', 'user_id', 'class_id');
     }
+
+    public function getRoleNameAttribute()
+    {
+        $roles = [1 => 'Admin', 2 => 'Student', 3 => 'Teacher'];
+        return $roles[$this->attributes['role']];
+    }
+
+    public function getFacultyNameAttribute()
+    {
+        return $this->faculty->faculty_name ?? 'Unknown';
+    }
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class, 'faculty_id', 'id');
+    }
 }

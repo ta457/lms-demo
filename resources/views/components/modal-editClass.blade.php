@@ -175,7 +175,7 @@
           </tbody>
         </table>
       </div>
-      <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+      {{-- <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
         aria-label="Table navigation">
         <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
           Showing
@@ -229,7 +229,10 @@
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> --}}
+      <div id="admin-paginate" class="bottom-0 fixed md:space-y-0 p-4">
+        {{ $members->links() }}
+      </div>
     </div>
   </div>
 </div>
@@ -240,7 +243,7 @@
       <!-- Modal content -->
       <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
           <!-- Modal header -->
-          <div class="flex justify-between items-center mb-4 rounded-t dark:border-gray-600">
+          <div class="flex justify-between items-center mb-2 mt-2 rounded-t dark:border-gray-600">
               <div class="w-full md:w-1/2">
                 <form class="flex items-center">
                   <div class="relative w-full">
@@ -278,7 +281,8 @@
                       @if ($members->where('id', $user->id)->count() !== 0)
                         @checked(true)
                       @endif
-                      class="" type="checkbox" id="update-member-{{ $user->id }}" name="update-members[]" value="{{ $user->id }}"
+                      class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" 
+                      type="checkbox" id="update-member-{{ $user->id }}" name="update-members[]" value="{{ $user->id }}"
                     >
                   </td>
                   

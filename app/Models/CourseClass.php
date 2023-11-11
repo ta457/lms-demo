@@ -12,13 +12,17 @@ class CourseClass extends Model
 
     protected $guarded = [];
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
-
     public function members(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'class_members', 'class_id', 'user_id');
+    }
+
+    public function getCourseNameAttribute()
+    {
+        return $this->course->course_name ?? 'Unknown';
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }

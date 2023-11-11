@@ -154,5 +154,10 @@ class DatabaseSeeder extends Seeder
                     'class_id' => $db2->id,
                     'user_id' => $teacher2->id
                 ]);
+    
+        User::factory(10)->create([
+            'faculty_id' => 1,
+            'role' => 2
+        ]);
     }
 }

@@ -13,39 +13,15 @@ use PhpParser\Builder\Class_;
 
 class AdminDashboardController extends Controller
 {   
-    // public function getUser() {
-    //     $userID = auth()->user()->id;
-    //     return User::find($userID);
-    // }
-
-    public function getRoleName($id) {
-        if ($id === 1) return 'Admin';
-        if ($id === 2) return 'Student';
-        if ($id === 3) return 'Teacher';
-    }
 
     public function users()
     {   
-        $records = User::get();
-        $faculties = Faculty::get();
-        $columns = ['id','name','username','email','role','faculty'];
-        $data = [];
-        //dd($faculty->where('id', $records[1]->faculty_id)[0]->faculty_name);
-        foreach ($records as $record) {
-            $data[] = array_combine($columns, [
-                $record->id,
-                $record->name,
-                $record->username,
-                $record->email,
-                $this->getRoleName($record->role),
-                $faculties->where('id', $record->faculty_id)->first()->faculty_name ?? 'NULL'
-            ]);
-        }
-        //$admin = array_shift($data);
+        $columns = ['id','name','username','email','role_name','faculty_name'];
+
         $props = [
-            'columns' => $columns, 
-            'data' => $data, 
-            'faculties' => $faculties,
+            'records' => User::paginate(10),
+            'columns' => $columns,
+            'faculties' => Faculty::get(),
             'url' => '/admin-dashboard/users'
         ];
         return view('admin.admin-users', [
@@ -72,7 +48,7 @@ class AdminDashboardController extends Controller
     public function editUser(User $user) {
         $props = [
             'user' => $user,
-            'faculties' => Faculty::Get()
+            'faculties' => Faculty::get()
         ];
         return view('admin.edit-user', [
             'props' => $props
@@ -104,18 +80,10 @@ class AdminDashboardController extends Controller
 
     public function faculties()
     {
-        $records = Faculty::get();
         $columns = ['id','faculty_name'];
-        $data = [];
-        foreach ($records as $record) {
-            $data[] = array_combine($columns, [
-                $record->id,
-                $record->faculty_name
-            ]);
-        }
         $props = [
-            'columns' => $columns, 
-            'data' => $data,
+            'records' => Faculty::paginate(10),
+            'columns' => $columns,
             'url' => '/admin-dashboard/faculties'
         ];
         return view('admin.admin-faculties', [
@@ -158,22 +126,11 @@ class AdminDashboardController extends Controller
 
     public function courses()
     {
-        $faculties = Faculty::get();
-        $records = Course::get();
-        $columns = ['id','course_name', 'faculty'];
-        $data = [];
-        //dd($faculty->where('id', $records[0]->faculty_id)[0]->faculty_name);
-        foreach ($records as $record) {
-            $data[] = array_combine($columns, [
-                $record->id,
-                $record->course_name,
-                $faculties->where('id', $record->faculty_id)->first()->faculty_name
-            ]);
-        }
+        $columns = ['id','course_name', 'faculty_name'];
         $props = [
             'columns' => $columns, 
-            'data' => $data, 
-            'faculties' => $faculties,
+            'records' => Course::paginate(10), 
+            'faculties' => Faculty::get(),
             'url' => '/admin-dashboard/courses'
         ];
         return view('admin.admin-courses', [
@@ -219,21 +176,11 @@ class AdminDashboardController extends Controller
     public function classes()
     {
         $courses = Course::get();
-        $records = CourseClass::get();
-        $columns = ['id','class_name', 'course'];
-        $data = [];
-
-        foreach ($records as $record) {
-            $data[] = array_combine($columns, [
-                $record->id,
-                $record->class_name,
-                $courses->where('id', $record->course_id)->first()->course_name
-            ]);
-        }
+        $columns = ['id','class_name', 'course_name'];
         $props = [
             'columns' => $columns, 
-            'data' => $data, 
-            'courses' => $courses,
+            'records' => CourseClass::paginate(10), 
+            'courses' => Course::get(),
             'url' => '/admin-dashboard/classes'
         ];
         return view('admin.admin-classes', [
@@ -263,7 +210,7 @@ class AdminDashboardController extends Controller
             'courses' => Course::get(),
             'faculties' => Faculty::get(),
             'users' => User::get(),
-            'members' => $class->members
+            'members' => $class->members()->paginate(10)
         ];
         return view('admin.edit-class', [
             'props' => $props
