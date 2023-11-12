@@ -29,11 +29,11 @@ class DatabaseSeeder extends Seeder
         $default = Faculty::create([
             'faculty_name' => 'Unassigned'
         ]);
-        $itFac = Faculty::create([
-            'faculty_name' => 'Công nghệ thông tin'
+        $csFac = Faculty::create([
+            'faculty_name' => 'Computer Science'
         ]);
-        $eduFac = Faculty::create([
-            'faculty_name' => 'Sư phạm tin'
+        $mathFac = Faculty::create([
+            'faculty_name' => 'Mathematics'
         ]);
 
         $admin = User::create([
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'student1@gmail.com',
             'password' => '12345678',
             'role' => 2,
-            'faculty_id' => $itFac->id
+            'faculty_id' => $csFac->id
         ]);
         $student2 = User::create([
             'username' => 'student2',
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'student2@gmail.com',
             'password' => '12345678',
             'role' => 2,
-            'faculty_id' => $eduFac->id
+            'faculty_id' => $mathFac->id
         ]);
         $teacher1 = User::create([
             'username' => 'teacher1',
@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'teacher1@gmail.com',
             'password' => '12345678',
             'role' => 3,
-            'faculty_id' => $itFac->id
+            'faculty_id' => $csFac->id
         ]);
         $teacher2 = User::create([
             'username' => 'teacher2',
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'teacher2@gmail.com',
             'password' => '12345678',
             'role' => 3,
-            'faculty_id' => $eduFac->id
+            'faculty_id' => $mathFac->id
         ]);
         $teacher3 = User::create([
             'username' => 'teacher3',
@@ -82,16 +82,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'teacher3@gmail.com',
             'password' => '12345678',
             'role' => 3,
-            'faculty_id' => $itFac->id
+            'faculty_id' => $csFac->id
         ]);
 
         $java = Course::create([
-            'course_name' => 'Lập trình Java',
-            'faculty_id' => $itFac->id
+            'course_name' => 'Data Structures & Algorithms',
+            'faculty_id' => $csFac->id
         ]);
             $java1 = CourseClass::create([
                 'course_id' => $java->id,
-                'class_name' => 'Java 1'
+                'class_name' => 'DA 1'
             ]);
                 ClassMembers::create([
                     'class_id' => $java1->id,
@@ -103,7 +103,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             $java2 = CourseClass::create([
                 'course_id' => $java->id,
-                'class_name' => 'Java 2'
+                'class_name' => 'DA 2'
             ]);
                 ClassMembers::create([
                     'class_id' => $java2->id,
@@ -115,12 +115,12 @@ class DatabaseSeeder extends Seeder
                 ]);
 
         $web = Course::create([
-            'course_name' => 'Công nghệ web',
-            'faculty_id' => $itFac->id
+            'course_name' => 'Web Development',
+            'faculty_id' => $csFac->id
         ]);
             $web1 = CourseClass::create([
                 'course_id' => $web->id,
-                'class_name' => 'CNWeb 1'
+                'class_name' => 'WebDev 1'
             ]);
                 ClassMembers::create([
                     'class_id' => $web1->id,
@@ -132,12 +132,12 @@ class DatabaseSeeder extends Seeder
                 ]);
 
         $db = Course::create([
-            'course_name' => 'Cơ sở dữ liệu',
-            'faculty_id' => $eduFac->id
+            'course_name' => 'Database',
+            'faculty_id' => $mathFac->id
         ]);
             $db1 = CourseClass::create([
                 'course_id' => $db->id,
-                'class_name' => 'CSDL 1'
+                'class_name' => 'DB 1'
             ]);
                 ClassMembers::create([
                     'class_id' => $db1->id,
@@ -149,7 +149,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             $db2 = CourseClass::create([
                 'course_id' => 2,
-                'class_name' => 'CSDL 2'
+                'class_name' => 'DB 2'
             ]);
                 ClassMembers::create([
                     'class_id' => $db2->id,
