@@ -29,15 +29,14 @@ class ProfileController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'max:255',
-            'email' => 'email|max:255',
             'avatar' => 'image'
         ]);
+
         if ($request->avatar) {
             $attributes['avatar'] = request()->file('avatar')->store('avatar');
-        }
-
-        if(Auth::user()->avatar) {
-            Storage::delete(Auth::user()->avatar);
+            if(Auth::user()->avatar) {
+                Storage::delete(Auth::user()->avatar);
+            }
         }
 
         $request->user()->fill($attributes);

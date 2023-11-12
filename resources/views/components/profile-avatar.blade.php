@@ -1,11 +1,11 @@
 @if (Auth::user()->avatar)
-<img class="mr-1 w-24 h-24 object-cover p-1 rounded-full" style="" src="/storage/{{ Auth::user()->avatar }}"
-  alt="user_avatar">
+  <img class="w-36 h-36 object-cover rounded-l-lg" style="" src="/storage/{{ Auth::user()->avatar }}" alt="user_avatar">
 @else
-<div class="relative w-24 h-24 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-1">
-  <svg class="absolute w-24 h-24 text-gray-400 -left-1" fill="currentColor" viewBox="-1 -2 20 20"
-    xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-  </svg>
-</div>
+  <div class="flex justify-center items-center w-36 h-36 overflow-hidden bg-gray-200 dark:bg-gray-600 rounded-l-lg">
+    <svg class="w-32 h-32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="">
+      <path
+        d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"
+        fill="#9ca3af" />
+    </svg>
+  </div>
 @endif

@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Update your account's profile information.") }}
         </p>
     </header>
 
@@ -17,27 +17,45 @@
         @csrf
         @method('patch')
 
-        <div>
+        <div class="w-full rounded-xl md:shadow-lg flex text-gray-700">
             <x-profile-avatar />
+            <div class="py-3 px-6 flex flex-col justify-items-center h-full">
+                <p class="mb-3 text-2xl font-semibold">
+                    {{ Auth::user()->name }}
+                </p>
+                <p class="font-normal text-sm mb-1"><strong>
+                    @if (Auth::user()->role == 1)
+                        Administrator
+                    @else
+                        {{ Auth::user()->role_name }}</strong> / Faculty: {{ Auth::user()->faculty_name }}
+                    @endif
+                </p>
+                <p class="font-normal text-sm mb-1">
+                    {{ Auth::user()->username }}
+                </p>
+                <p class="font-normal text-sm mb-1">
+                    {{ Auth::user()->email }}
+                </p>
+            </div>
         </div>
 
-        <div>
-            <x-input-label for="avatar" :value="__('Profile picture')" />
+        <div class="mt-6">
+            <x-input-label for="avatar" :value="__('Change your avatar')" />
             {{-- <input 
                 class="mt-1 block w-full border-gray-300 focus:ring-primary-500 focus:border-primary-500 rounded-md shadow-sm" 
                 type="file" name="avatar" id="avatar"
             > --}}
-            <input class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+            <input class="mt-1 block w-full font-normal text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
                 id="avatar" name="avatar" type="file">
         </div>
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+        <div class="mt-2">
+            <x-input-label for="name" :value="__('Change your name')" />
+            <x-text-input id="name" name="name" type="text" class="font-normal mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
+        <div class="hidden">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" readonly class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -61,7 +79,7 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="mt-6 flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')

@@ -6,10 +6,11 @@
 
 <section class="z-10 shadow-md bg-white dark:bg-gray-900 sm:p-0 col-span-4">
   {{-- <div class="mx-auto max-w-screen-xl px-4 lg:px-0"> --}}
+    <h2 class="px-8 pt-8 pb-2 text-3xl font-semibold dark:text-white">{{ $slot }}</h2>
     <div class="w-full px-4 lg:px-0">
       <!-- Start coding here -->
-      <div class="pt-10 bg-white dark:bg-gray-800 relative overflow-hidden">
-        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+      <div class="bg-white dark:bg-gray-800 relative overflow-hidden">
+        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 py-4 px-8">
 
           <div class="w-full md:w-1/2">
             <form class="flex items-center">

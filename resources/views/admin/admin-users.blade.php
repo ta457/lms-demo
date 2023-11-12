@@ -4,7 +4,7 @@
 
     <x-admin-sidebar />
 
-    <x-admin-table :props="$props" />
+    <x-admin-table :props="$props">Users</x-admin-table>
 
     <!-- Main modal -->
     <x-modal-addUser :props="$props"/>

@@ -1,5 +1,5 @@
 @if (Auth::user()->avatar)
-<img class="mr-1 w-12 h-12 object-cover p-1 rounded-full" style="" src="/storage/{{ Auth::user()->avatar }}"
+<img class="w-12 h-12 object-cover p-1 rounded-full" style="" src="/storage/{{ Auth::user()->avatar }}"
   alt="user_avatar">
 @else
 <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-1">

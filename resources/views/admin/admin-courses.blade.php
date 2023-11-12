@@ -4,7 +4,7 @@
 
     <x-admin-sidebar />
 
-    <x-admin-table :props="$props" />
+    <x-admin-table :props="$props">Courses</x-admin-table>
 
     <!-- Main modal -->
     <x-modal-addCourse :props="$props" />
