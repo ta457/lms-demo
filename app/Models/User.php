@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function classes()
     {
-        return $this->belongsToMany(CourseClass::class, 'class_members', 'user_id', 'class_id');
+        return $this->belongsToMany(CourseClass::class, 'class_members', 'user_id', 'class_id')->with('course');
     }
 
     public function getRoleNameAttribute()
@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function getFacultyNameAttribute()
     {
-        return $this->faculty->faculty_name ?? 'Unknown';
+        return $this->faculty->faculty_name;
     }
     public function faculty()
     {

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id');
+            $table->unsignedBigInteger('class_id');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->string('section_title');
+            $table->unsignedBigInteger('order');
             $table->timestamps();
         });
     }

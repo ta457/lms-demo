@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\CourseClassController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -37,6 +39,18 @@ Route::get('/', function() {
 Route::get('/dashboard', 
     [DashboardController::class, 'index']
 )->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/class/{class}',
+    [CourseClassController::class, 'index']
+)->middleware(['auth', 'verified']);
+
+Route::get('/class/{class}/edit',
+    [CourseClassController::class, 'edit']
+)->middleware(['auth', 'verified']);
+
+Route::post('/class/{class}/edit',
+    [CourseClassController::class, 'store']
+)->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

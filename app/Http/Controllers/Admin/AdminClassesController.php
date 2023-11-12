@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseClass;
-use App\Models\Faculty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +47,6 @@ class AdminClassesController extends Controller
             'class' => $class,
             'delete' => $class,
             'courses' => Course::get(),
-            'faculties' => Faculty::get(),
             'users' => User::get(),
             'members' => $class->members()->paginate(8),
             'url' => '/admin-dashboard/classes'

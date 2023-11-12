@@ -1,7 +1,6 @@
 @props([
   'class' => $props['class'],
   'courses' => $props['courses'],
-  'faculties' => $props['faculties'],
   'users' => $props['users'],
   'members' => $props['members']
 ])
@@ -167,16 +166,8 @@
               <td class="px-4 py-3">{{ $user->id }}</td>
               <td class="px-4 py-3">{{ $user->username }}</td>
               <td class="px-4 py-3">{{ $user->name }}</td>
-              <td class="px-4 py-3">
-                @if ($user->role == 2)
-                  Student
-                @else
-                  Teacher
-                @endif
-              </td>
-              <td class="px-4 py-3">
-                {{ $faculties->find($user->faculty_id)->faculty_name }}
-              </td>
+              <td class="px-4 py-3">{{ $user->role_name }}</td>
+              <td class="px-4 py-3">{{ $user->faculty_name }}</td>
             </tr>
             @endforeach
           </tbody>

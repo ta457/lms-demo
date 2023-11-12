@@ -8,6 +8,7 @@ use App\Models\ClassMembers;
 use App\Models\Course;
 use App\Models\CourseClass;
 use App\Models\Faculty;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -162,6 +163,10 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create([
             'faculty_id' => 1,
             'role' => 2
+        ]);
+
+        Section::factory(3)->create([
+            'class_id' => $java1->id
         ]);
     }
 }

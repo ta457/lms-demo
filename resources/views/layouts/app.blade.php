@@ -18,7 +18,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased" 
-        style="{{ Request::is('profile') ? 'overflow: auto !important;' : '' }}"
+        style="{{ Str::contains(url()->current(), 'admin-dashboard') ? '' : 'overflow: auto !important;' }}"
     >
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
