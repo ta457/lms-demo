@@ -171,12 +171,12 @@ class DatabaseSeeder extends Seeder
             'class_id' => $da1->id,
             'section_title' => 'Week 1: Example title'
         ]);
-            Subsection::create([
-                'section_id' => $sec1->id,
-                'type' => 2,
-                'title' => 'Lecture 1 pdf file',
-                'file' => 'section-files/SWTM-2088_Atlassian-Git-Cheatsheet.pdf'
-            ]);
+            // Subsection::create([
+            //     'section_id' => $sec1->id,
+            //     'type' => 2,
+            //     'title' => 'Lecture 1 pdf file',
+            //     'file' => 'section-files/SWTM-2088_Atlassian-Git-Cheatsheet.pdf'
+            // ]);
             Subsection::create([
                 'section_id' => $sec1->id,
                 'type' => 3,
