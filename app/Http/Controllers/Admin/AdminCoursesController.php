@@ -15,7 +15,7 @@ class AdminCoursesController extends Controller
         $columns = ['id','course_name', 'faculty_name'];
         $props = [
             'columns' => $columns, 
-            'records' => Course::with('faculty')->paginate(8), 
+            'records' => Course::with('faculty')->paginate(10), 
             'faculties' => Faculty::get(),
             'url' => '/admin-dashboard/courses'
         ];

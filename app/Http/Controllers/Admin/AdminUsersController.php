@@ -14,7 +14,7 @@ class AdminUsersController extends Controller
         $columns = ['id', 'name', 'username', 'email', 'role_name', 'faculty_name'];
 
         $props = [
-            'records' => User::with('faculty')->paginate(8),
+            'records' => User::with('faculty')->paginate(10),
             'columns' => $columns,
             'faculties' => Faculty::get(),
             'url' => '/admin-dashboard/users'

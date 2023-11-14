@@ -10,7 +10,7 @@
       </svg>
     </div>
     <div>
-      <p class="text-sm font-medium text-primary-600 group-hover:text-primary-400">
+      <p class="text-sm font-medium text-primary-600 group-hover:text-primary-500">
         {{ $title }}
       </p>
     </div>

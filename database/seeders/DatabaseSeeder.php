@@ -166,7 +166,7 @@ class DatabaseSeeder extends Seeder
             'role' => 2
         ]);
 
-        // subsection type: 1 => text, 2 => file, 3 => link, 4 => submission
+        // subsection type: 1 => text, 2 => file, 3 => link, 4 => assignment
         $sec1 = Section::create([
             'class_id' => $da1->id,
             'section_title' => 'Week 1: Example title'
@@ -192,9 +192,9 @@ class DatabaseSeeder extends Seeder
             Subsection::create([
                 'section_id' => $sec1->id,
                 'type' => 4,
-                'title' => 'Student submission example',
+                'title' => 'Assignment for week 1',
                 'deadline' => '2023-11-24 17:03:00',
-                'instruction' => 'All students are required to submit at least two files.'
+                'instruction' => 'All students are required to submit files in .zip format.'
             ]);
         Section::create([
             'class_id' => $da1->id,

@@ -12,7 +12,7 @@ class AdminFacultiesController extends Controller
     {
         $columns = ['id','faculty_name'];
         $props = [
-            'records' => Faculty::paginate(8),
+            'records' => Faculty::paginate(10),
             'columns' => $columns,
             'url' => '/admin-dashboard/faculties'
         ];

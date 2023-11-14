@@ -6,7 +6,7 @@
   {{-- header===================================================== --}}
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __($class->course_name . " / " . $class->class_name) }}
+      {{ __($class->course_name . " (Class: " . $class->class_name).")" }}
     </h2>
   </x-slot>
 
@@ -40,7 +40,10 @@
             @endif
 
             @if ($subsection->type == 4)
-            <x-subsection-submit :title="$subsection->title" :deadline="$subsection->deadline"
+            <x-subsection-assignment 
+              :subsection="$subsection->id"
+              :title="$subsection->title" 
+              :deadline="$subsection->deadline"
               :instruction="$subsection->instruction" />
             @endif
           </div>

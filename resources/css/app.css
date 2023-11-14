@@ -10,14 +10,9 @@ body {
     overflow: hidden !important; 
   }
 }
-#admin-paginate {
-  position: static;
-}
-@media screen and (min-width: 1030px) {
-  #admin-paginate {
-    position: fixed;
-  }
-}
+/* #admin-paginate {
+  
+} */
 /* ================================================================== */
 .card {
   transition: all .3s cubic-bezier(0.175, 0.885, 0, 1);
@@ -28,51 +23,6 @@ body {
   transform:scale(1.02);
 }
 /* =================================================================== */
-
-#admin-paginate > nav > :nth-child(2) > :first-child {
-  margin-right: 0;
-}
-
-@media screen and (min-width: 900px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 25vw; 
-  }
-}
-@media screen and (min-width: 1000px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 30vw; 
-  }
-}
-@media screen and (min-width: 1200px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 35vw; 
-  }
-}
-@media screen and (min-width: 1300px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 38vw; 
-  }
-}
-@media screen and (min-width: 1400px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 40vw; 
-  }
-}
-@media screen and (min-width: 1500px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 43vw; 
-  }
-}
-@media screen and (min-width: 1600px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 45vw; 
-  }
-}
-@media screen and (min-width: 1700px) {
-  #admin-paginate > nav > :nth-child(2) > :first-child {
-    margin-right: 47vw; 
-  }
-}
 
 /* ========================================================== */
 /* add text subsection modal for teacher  */

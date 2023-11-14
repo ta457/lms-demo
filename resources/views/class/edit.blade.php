@@ -49,7 +49,10 @@
             @endif
 
             @if ($subsection->type == 4)
-            <x-subsection-submit :title="$subsection->title" :deadline="$subsection->deadline"
+            <x-subsection-assignment 
+              :title="$subsection->title"
+              :subsection="$subsection->id"
+              :deadline="$subsection->deadline"
               :instruction="$subsection->instruction" />
             @endif
           </div>
@@ -295,7 +298,7 @@
 @include('class.modals.addText')
 @include('class.modals.addFile')
 @include('class.modals.addLink')
-@include('class.modals.addSub')
+@include('class.modals.addAssignment')
 
 <script>
   // add section toggle ==================================================

@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseClassController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\StudenSubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/', function () {
 })->middleware('guest');
 
 //if user is logged in, redirect to dashboard or admin-dashboard
-Route::get('/', function() {
+Route::get('/', function () {
     if (auth()->user()?->username !== 'admin') {
         return redirect('/dashboard');
     } else {
@@ -37,34 +38,23 @@ Route::get('/', function() {
     }
 })->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', 
+Route::get(
+    '/dashboard',
     [DashboardController::class, 'index']
 )->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/class/{class}',
+Route::get(
+    '/class/{class}',
     [CourseClassController::class, 'index']
 )->middleware(['auth', 'verified']);
-Route::get('/class/{class}/edit',
-    [CourseClassController::class, 'edit']
-)->middleware(['auth', 'verified']);
-Route::post('/class/{class}/edit',
-    [CourseClassController::class, 'store']
-)->middleware(['auth', 'verified']);
 
-Route::post('/section/{section}/store-link', 
-    [SectionController::class, 'storeLink']
+Route::get(
+    '/section/{subsection}/submit',
+    [StudenSubmissionController::class, 'index']
 )->middleware(['auth', 'verified']);
-
-Route::post('/section/{section}/store-text', 
-    [SectionController::class, 'storeText']
-)->middleware(['auth', 'verified']);
-
-Route::post('/section/{section}/store-file', 
-    [SectionController::class, 'storeFile']
-)->middleware(['auth', 'verified']);
-
-Route::post('/section/{section}/store-sub', 
-    [SectionController::class, 'storeSub']
+Route::post(
+    '/section/{subsection}/submit',
+    [StudenSubmissionController::class, 'store']
 )->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
@@ -73,5 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/teacher.php';

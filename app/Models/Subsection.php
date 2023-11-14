@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\StudenSubmission;
 
 class Subsection extends Model
 {
@@ -18,6 +19,6 @@ class Subsection extends Model
     
     public function studentSubmissions()
     {
-        return $this->hasMany(StudentSubmission::class);
+        return $this->hasMany(StudenSubmission::class);
     }
 }

@@ -1,6 +1,6 @@
 <div class="border-b border-gray-200 w-full pb-2">
   <div class="flex justify-between items-center w-full">
-    <a href="" class="flex gap-4 items-center group">
+    <a href="/section/{{ $subsection }}/submit" class="flex gap-4 items-center group">
       <div class="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center">
         <svg class="w-5 h-5 text-gray-400 dark:text-white group-hover:text-gray-700" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -11,7 +11,7 @@
         </svg>
       </div>
       <div>
-        <p class="text-sm font-medium text-primary-600 group-hover:text-primary-400">
+        <p class="text-sm font-medium text-primary-600 group-hover:text-primary-500">
           {{ $title }}
         </p>
       </div>

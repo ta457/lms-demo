@@ -4,7 +4,7 @@
 'url' => $props['url']
 ])
 
-<section class="z-10 shadow-md bg-white dark:bg-gray-900 sm:p-0 col-span-4">
+<section class="z-10 shadow-md bg-white dark:bg-gray-900 sm:p-0 col-span-4" style="overflow:auto; padding-bottom:8rem;">
   {{-- <div class="mx-auto max-w-screen-xl px-4 lg:px-0"> --}}
     <h2 class="px-8 pt-8 pb-2 text-3xl font-semibold dark:text-white">{{ $slot }}</h2>
     <div class="w-full px-4 lg:px-0">
@@ -155,10 +155,11 @@
               @endforeach
             </tbody>
           </table>
+          <div id="admin-paginate" class="w-full bottom-0 md:space-y-0 p-4 bg-white bg-transparent">
+            {{ $records->links() }}
+          </div>
         </div>
-        <div id="admin-paginate" class="bottom-0 md:space-y-0 p-4">
-          {{ $records->links() }}
-        </div>
+        
       </div>
     </div>
 </section>

@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Subsection;
 
 class StudenSubmission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['subsection_id', 'file'];
+    protected $fillable = ['subsection_id', 'student_id', 'file'];
 
     public function subsection()
     {
