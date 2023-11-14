@@ -30,12 +30,13 @@
                                 @else
                                     href="/class/{{ $class->id }}/edit"
                                 @endif 
-                                style="height:200px;"
-                                class="shadow-md drop-shadow-lg relative bg-transparent hover:shadow-xl card max-w-sm rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="rounded-lg absolute w-full h-full bg-cover bg-center z-0" 
-                                    style="background-image: url('/img/course_bg.jpg'); filter:brightness(50%);">
+                                style=""
+                                class="h-fit shadow-md drop-shadow-lg relative bg-transparent hover:shadow-xl card max-w-sm rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="rounded-lg absolute w-full h-full bg-slate-100 bg-cover bg-center z-0" 
+                                    {{-- style="background-image: url('/img/course_bg.jpg'); filter:brightness(50%);" --}}
+                                >
                                 </div>
-                                <div class="relative p-4 z-10 text-white">
+                                <div class="relative p-4 z-10 text-gray-900">
                                     <div class="flex justify-between items-center mb-5">
                                         <span
                                             class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
@@ -58,7 +59,7 @@
                                     <div class="flex justify-between items-center">
                                         <div class="flex items-center space-x-4">
                                             <div
-                                                class="relative w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                                class="ring-2 ring-gray-300 dark:ring-gray-500 relative w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                                                 <svg class="absolute w-10 h-10 text-gray-400 -left-1" fill="currentColor"
                                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd"
@@ -71,7 +72,7 @@
                                             </span>
                                         </div>
                                         <div
-                                            class="inline-flex items-center font-medium text-primary-200 dark:text-primary-500 hover:underline">
+                                            class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
                                             More
                                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">

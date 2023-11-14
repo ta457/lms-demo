@@ -24,4 +24,9 @@ class Section extends Model
     {   
         return $this->belongsTo(CourseClass::class);
     }
+
+    public function subsections()
+    {
+        return $this->hasMany(Subsection::class);
+    }
 }

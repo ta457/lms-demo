@@ -17,7 +17,7 @@
         @csrf
         @method('patch')
 
-        <div class="w-full rounded-xl md:shadow-lg flex text-gray-700">
+        <div class="card hover:shadow-lg w-full rounded-xl md:shadow-md flex text-gray-900 bg-slate-100">
             <x-profile-avatar />
             <div class="py-3 px-6 flex flex-col justify-items-center h-full">
                 <p class="mb-3 text-2xl font-semibold">

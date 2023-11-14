@@ -156,7 +156,7 @@
             </tbody>
           </table>
         </div>
-        <div id="admin-paginate" class="bottom-0 fixed md:space-y-0 p-4">
+        <div id="admin-paginate" class="bottom-0 md:space-y-0 p-4">
           {{ $records->links() }}
         </div>
       </div>

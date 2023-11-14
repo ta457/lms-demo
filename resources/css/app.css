@@ -10,7 +10,15 @@ body {
     overflow: hidden !important; 
   }
 }
-
+#admin-paginate {
+  position: static;
+}
+@media screen and (min-width: 1030px) {
+  #admin-paginate {
+    position: fixed;
+  }
+}
+/* ================================================================== */
 .card {
   transition: all .3s cubic-bezier(0.175, 0.885, 0, 1);
   transform: perspective(1px) translateZ(0);
@@ -19,9 +27,10 @@ body {
 .card:hover {
   transform:scale(1.02);
 }
+/* =================================================================== */
 
 #admin-paginate > nav > :nth-child(2) > :first-child {
-  margin-right: 50px;
+  margin-right: 0;
 }
 
 @media screen and (min-width: 900px) {
@@ -63,4 +72,14 @@ body {
   #admin-paginate > nav > :nth-child(2) > :first-child {
     margin-right: 47vw; 
   }
+}
+
+/* ========================================================== */
+/* add text subsection modal for teacher  */
+#editor {
+  border: thin solid #ccc;
+  height: 10rem;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
 }

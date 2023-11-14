@@ -31,7 +31,8 @@ class CourseClass extends Model
 
     public function sections($id)
     {   
-        $result = DB::table('sections')->where('class_id', $id)->get();
+        //$result = DB::table('sections')->where('class_id', $id)->get();
+        $result = Section::get()->where('class_id', $id);
         return $result;
     }
 }

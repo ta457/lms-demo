@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CourseClassController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,13 +44,27 @@ Route::get('/dashboard',
 Route::get('/class/{class}',
     [CourseClassController::class, 'index']
 )->middleware(['auth', 'verified']);
-
 Route::get('/class/{class}/edit',
     [CourseClassController::class, 'edit']
 )->middleware(['auth', 'verified']);
-
 Route::post('/class/{class}/edit',
     [CourseClassController::class, 'store']
+)->middleware(['auth', 'verified']);
+
+Route::post('/section/{section}/store-link', 
+    [SectionController::class, 'storeLink']
+)->middleware(['auth', 'verified']);
+
+Route::post('/section/{section}/store-text', 
+    [SectionController::class, 'storeText']
+)->middleware(['auth', 'verified']);
+
+Route::post('/section/{section}/store-file', 
+    [SectionController::class, 'storeFile']
+)->middleware(['auth', 'verified']);
+
+Route::post('/section/{section}/store-sub', 
+    [SectionController::class, 'storeSub']
 )->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

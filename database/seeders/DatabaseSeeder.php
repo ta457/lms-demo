@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\CourseClass;
 use App\Models\Faculty;
 use App\Models\Section;
+use App\Models\Subsection;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -85,32 +86,32 @@ class DatabaseSeeder extends Seeder
             'faculty_id' => $csFac->id
         ]);
 
-        $java = Course::create([
+        $da = Course::create([
             'course_name' => 'Data Structures & Algorithms',
             'faculty_id' => $csFac->id
         ]);
-            $java1 = CourseClass::create([
-                'course_id' => $java->id,
+            $da1 = CourseClass::create([
+                'course_id' => $da->id,
                 'class_name' => 'DA 1'
             ]);
                 ClassMembers::create([
-                    'class_id' => $java1->id,
+                    'class_id' => $da1->id,
                     'user_id' => $student1->id
                 ]);
                 ClassMembers::create([
-                    'class_id' => $java1->id,
+                    'class_id' => $da1->id,
                     'user_id' => $teacher1->id
                 ]);
-            $java2 = CourseClass::create([
-                'course_id' => $java->id,
+            $da2 = CourseClass::create([
+                'course_id' => $da->id,
                 'class_name' => 'DA 2'
             ]);
                 ClassMembers::create([
-                    'class_id' => $java2->id,
+                    'class_id' => $da2->id,
                     'user_id' => $student2->id
                 ]);
                 ClassMembers::create([
-                    'class_id' => $java2->id,
+                    'class_id' => $da2->id,
                     'user_id' => $teacher2->id
                 ]);
 
@@ -165,8 +166,39 @@ class DatabaseSeeder extends Seeder
             'role' => 2
         ]);
 
-        Section::factory(3)->create([
-            'class_id' => $java1->id
+        // subsection type: 1 => text, 2 => file, 3 => link, 4 => submission
+        $sec1 = Section::create([
+            'class_id' => $da1->id,
+            'section_title' => 'Week 1: Example title'
+        ]);
+            Subsection::create([
+                'section_id' => $sec1->id,
+                'type' => 2,
+                'title' => 'Lecture 1 pdf file',
+                'file' => 'section-files/SWTM-2088_Atlassian-Git-Cheatsheet.pdf'
+            ]);
+            Subsection::create([
+                'section_id' => $sec1->id,
+                'type' => 3,
+                'title' => 'Link to suplement learning materials',
+                'url' => 'https://www.theodinproject.com/'
+            ]);
+            Subsection::create([
+                'section_id' => $sec1->id,
+                'type' => 1,
+                'title' => 'Text content example',
+                'text_content' => '<b>This is a list:</b><div>-<i> item 1</i></div><div>- <i>item 2</i></div><div>- <i>item 3</i></div>'
+            ]);
+            Subsection::create([
+                'section_id' => $sec1->id,
+                'type' => 4,
+                'title' => 'Student submission example',
+                'deadline' => '2023-11-24 17:03:00',
+                'instruction' => 'All students are required to submit at least two files.'
+            ]);
+        Section::create([
+            'class_id' => $da1->id,
+            'section_title' => 'Week 2: Example title'
         ]);
     }
 }
