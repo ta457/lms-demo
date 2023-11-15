@@ -28,23 +28,32 @@
           <div class="flex gap-4 items-center">
 
             @if ($subsection->type == 1)
-            <x-subsection-text :title="$subsection->title" :content="$subsection->text_content" />
+            <x-subsection-text 
+              :title="$subsection->title" 
+              :content="$subsection->text_content"
+              :id="$subsection->id" />
             @endif
 
             @if ($subsection->type == 2)
-            <x-subsection-file :href="$subsection->file" :title="$subsection->title" />
+            <x-subsection-file 
+              :href="$subsection->file" 
+              :title="$subsection->title"
+              :id="$subsection->id" />
             @endif
 
             @if ($subsection->type == 3)
-            <x-subsection-link :href="$subsection->url" :title="$subsection->title" />
+            <x-subsection-link 
+              :href="$subsection->url" 
+              :title="$subsection->title" 
+              :id="$subsection->id"/>
             @endif
 
             @if ($subsection->type == 4)
             <x-subsection-assignment 
-              :subsection="$subsection->id"
-              :title="$subsection->title" 
+              :title="$subsection->title"
               :deadline="$subsection->deadline"
-              :instruction="$subsection->instruction" />
+              :instruction="$subsection->instruction"
+              :id="$subsection->id" />
             @endif
           </div>
           @endforeach

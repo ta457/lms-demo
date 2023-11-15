@@ -24,9 +24,21 @@
         </div>
 
         <div class="text-sm text-gray-900">
-          <strong>Deadline: <p class="inline-block text-emerald-500">
-            {{ $subsection->deadline }}
-          </p></strong>
+          @if (\Carbon\Carbon::now()->lt($subsection->deadline))
+          <!-- Code to display when the current date is before the model's datetime -->
+          <strong>Deadline:
+            <p class="inline-block text-emerald-500">
+              {{ $subsection->deadline }}
+            </p>
+          </strong>
+          @else
+          <!-- Code to display when the current date is after or equal to the model's datetime -->
+          <strong>Deadline:
+            <p class="inline-block text-rose-500">
+              {{ $subsection->deadline }}
+            </p>
+          </strong>
+          @endif
         </div>
 
         <div class="mt-2 text-sm text-gray-900 border-b border-gray-200 pb-2">
@@ -36,15 +48,45 @@
 
         <div class="mt-2 text-sm text-gray-900 border-b border-gray-200 pb-2">
           <strong>Your submissions: </strong>
-          @foreach ($submissions as $submission)
-            <li>{{ $submission->file }}</li>
-          @endforeach
+          <div class="flex gap-4 mt-2">
+            @forelse ($submissions as $submission)
+              @if ($submission->student->id == Auth::user()->id)
+              <div
+                class="relative hover:bg-gray-300 group flex flex-col gap-2 p-2 block w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24 bg-gray-200 rounded-lg">
+                <a href="/storage/student-submissions/{{ $submission->file }}" target="_blank"
+                  class="text-sm text-gray-700 w-full hover:font-semibold hover:underline">
+                  {{ $submission->shortened_file_name }}
+                </a>
+                <div class="flex flex-col justify-center items-center">
+                  <svg class="group-hover:text-gray-700 w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                    <path
+                      d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Z" />
+                  </svg>
+                  <p class="mt-0.5 text-sm font-bold text-gray-700">{{ $submission->file_extension }}</p>
+                </div>
+
+                <button id="/submission/{{ $submission->id }}"
+                  class="absolute bottom-2 right-2 p-1 shadow-md text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                  <svg class="w-4 h-4 text-gray-700 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 18 20">
+                    <path
+                      d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z" />
+                  </svg>
+                </button>
+              </div>
+              @endif
+            @empty
+              <p class="text-sm">You haven't submitted anything.</p>
+            @endforelse
+          </div>
         </div>
 
         <div class="mt-2 text-sm text-gray-900">
           <strong>Upload: </strong>
         </div>
-        <form action="/section/{{ $subsection->id }}/submit" method="POST"  enctype="multipart/form-data">
+        <form action="/assignment/{{ $subsection->id }}" method="POST" enctype="multipart/form-data">
           @csrf
           <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white"
             ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);"
@@ -64,13 +106,14 @@
 
             <!-- scroll area -->
             <section class="h-full mt-2 w-full h-full flex flex-col">
-              <header class="rounded-lg bg-gray-50 border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+              <header
+                class="rounded-lg bg-gray-50 border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                 <p class="mb-3 font-semibold text-sm text-gray-900 flex flex-wrap justify-center">
                   <span>Drag and drop your</span>&nbsp;<span>files here or</span>
                 </p>
-                
+
                 <input id="hidden-input" type="file" name='files[]' multiple class="hidden" required />
-                
+
                 <button id="button" type="button"
                   class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                   Upload a file
@@ -104,6 +147,49 @@
     </div>
   </div>
 </x-app-layout>
+{{-- confirm delete modal ========================================================= --}}
+<button class="hidden" id="deleteButton" data-modal-target="deleteModal" data-modal-toggle="deleteModal"></button>
+<!-- Main modal -->
+<div id="deleteModal" tabindex="-1" aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+    <!-- Modal content -->
+    <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+      <button type="button"
+        class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        data-modal-toggle="deleteModal">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+      <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor"
+        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+          clip-rule="evenodd"></path>
+      </svg>
+      <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this file?</p>
+      <div class="flex justify-center items-center space-x-4">
+        <button data-modal-toggle="deleteModal" type="button"
+          class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+          No, cancel
+        </button>
+        <form id="delete-file" action="" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit"
+            class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+            Yes, I'm sure
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- upload files component========================================================== -->
 <!-- using two similar templates for simplicity in js code -->
@@ -171,6 +257,18 @@
 </template>
 
 <script>
+  let deleteBtns = document.querySelectorAll('[id^="/submission/"]');
+  console.log(deleteBtns);
+  deleteBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const dynamicNumber = btn.id.split("/")[2];
+      console.log(dynamicNumber);
+      document.getElementById('deleteButton').click();
+      const form = document.getElementById('delete-file');
+      form.action = `/submission/${dynamicNumber}`;
+    })
+  });
+
   const fileTempl = document.getElementById("file-template"),
   imageTempl = document.getElementById("image-template"),
   empty = document.getElementById("empty");
@@ -288,6 +386,8 @@
     gallery.append(empty);
   };
 
+  // ===============================================================================
+
 </script>
 
 <style>
@@ -317,4 +417,3 @@
     color: #2b6cb0;
   }
 </style>
-{{-- ============================================================================== --}}

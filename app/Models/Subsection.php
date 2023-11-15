@@ -16,8 +16,28 @@ class Subsection extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function getShortenedFileNameAttribute()
+    {
+        $maxLength = 12;
+        $filePath = $this->attributes['file'];
+        $parts = explode('/', $filePath);
+
+        if (strlen($parts[1]) > $maxLength) {
+            return substr($parts[1], 0, $maxLength) . '...';
+        } else {
+            return $parts[1];
+        }
+    }
+
+    public function getFileExtensionAttribute()
+    {
+        $extension = pathinfo($this->attributes['file'], PATHINFO_EXTENSION);
+
+        return $extension;
+    }
     
-    public function studentSubmissions()
+    public function submissions()
     {
         return $this->hasMany(StudenSubmission::class);
     }

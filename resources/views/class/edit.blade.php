@@ -21,7 +21,7 @@
           <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
             {{ $section->section_title }}
           </h3>
-          <button class="hover:cusor-pointer">
+          <a class="hover:cusor-pointer" href="/section/{{ $section->id }}/edit">
             <svg class="w-5 h-5 text-gray-400 hover:text-gray-700 dark:text-white" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
               <path
@@ -29,7 +29,7 @@
               <path
                 d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
             </svg>
-          </button>
+          </a>
         </div>
 
         <div class="flex flex-col gap-2">
@@ -37,23 +37,32 @@
           <div class="flex gap-4 items-center">
 
             @if ($subsection->type == 1)
-            <x-subsection-text :title="$subsection->title" :content="$subsection->text_content" />
+            <x-subsection-text 
+              :title="$subsection->title" 
+              :content="$subsection->text_content"
+              :id="$subsection->id" />
             @endif
 
             @if ($subsection->type == 2)
-            <x-subsection-file :href="$subsection->file" :title="$subsection->title" />
+            <x-subsection-file 
+              :href="$subsection->file" 
+              :title="$subsection->title"
+              :id="$subsection->id" />
             @endif
 
             @if ($subsection->type == 3)
-            <x-subsection-link :href="$subsection->url" :title="$subsection->title" />
+            <x-subsection-link 
+              :href="$subsection->url" 
+              :title="$subsection->title" 
+              :id="$subsection->id"/>
             @endif
 
             @if ($subsection->type == 4)
             <x-subsection-assignment 
               :title="$subsection->title"
-              :subsection="$subsection->id"
               :deadline="$subsection->deadline"
-              :instruction="$subsection->instruction" />
+              :instruction="$subsection->instruction"
+              :id="$subsection->id" />
             @endif
           </div>
           @endforeach
@@ -93,7 +102,7 @@
                     d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
                 </svg>
               </div>
-              <div href="#" id="/section/{{ $section->id }}/store-sub"
+              <div href="#" id="/section/{{ $section->id }}/store-assignment"
                 class="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center hover:cursor-pointer hover:bg-gray-300 group">
                 <svg class="w-5 h-5 text-gray-400 dark:text-white group-hover:text-gray-700" aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

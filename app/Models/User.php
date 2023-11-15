@@ -67,4 +67,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Faculty::class, 'faculty_id', 'id');
     }
+    public function submissions()
+    {
+        return $this->hasMany('App\Models\StudenSubmission', 'student_id');
+    }
 }

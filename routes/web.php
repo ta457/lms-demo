@@ -49,12 +49,16 @@ Route::get(
 )->middleware(['auth', 'verified']);
 
 Route::get(
-    '/section/{subsection}/submit',
+    '/assignment/{subsection}',
     [StudenSubmissionController::class, 'index']
 )->middleware(['auth', 'verified']);
 Route::post(
-    '/section/{subsection}/submit',
+    '/assignment/{subsection}',
     [StudenSubmissionController::class, 'store']
+)->middleware(['auth', 'verified']);
+Route::delete(
+    '/submission/{submission}',
+    [StudenSubmissionController::class, 'destroy']
 )->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

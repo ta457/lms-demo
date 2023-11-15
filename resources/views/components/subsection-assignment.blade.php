@@ -1,6 +1,12 @@
 <div class="border-b border-gray-200 w-full pb-2">
   <div class="flex justify-between items-center w-full">
-    <a href="/section/{{ $subsection }}/submit" class="flex gap-4 items-center group">
+    <a class="flex gap-4 items-center group"
+      @if(Auth::user()->role == 3)
+        href="/assignment/{{ $id }}/view-submissions"
+      @else
+        href="/assignment/{{ $id }}"
+      @endif
+    >
       <div class="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center">
         <svg class="w-5 h-5 text-gray-400 dark:text-white group-hover:text-gray-700" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -17,7 +23,7 @@
       </div>
     </a>
     @if (Auth::user()->role == '3')
-    <button class="hover:cusor-pointer">
+    <a class="hover:cusor-pointer" href="/subsection/{{ $id }}/edit-assignment">
       <svg class="w-5 h-5 text-gray-400 hover:text-gray-700 dark:text-white" aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
         <path
@@ -25,13 +31,23 @@
         <path
           d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
       </svg>
-    </button>
+    </a>
     @endif
   </div>
-  
+
   <div class="px-2 mt-2 ml-4 text-sm text-gray-700 border-l-2 border-gray-400">
     <div>
-      <strong>Deadline: <p class="inline-block text-emerald-500">{!! $deadline !!}</p></strong>
+      <strong>Deadline:
+        @if (\Carbon\Carbon::now()->lt($deadline))
+          <p class="inline-block text-emerald-500">
+            {{ $deadline }}
+          </p>
+        @else
+          <p class="inline-block text-rose-500">
+            {{ $deadline }}
+          </p>
+        @endif
+      </strong>
     </div>
     <div class="mt-1">
       <strong>Instruction: </strong>
