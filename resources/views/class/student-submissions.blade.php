@@ -36,12 +36,12 @@
           @endif
         </div>
 
-        <div class="mt-2 text-sm text-gray-900 border-b border-gray-200 pb-2">
+        <div class="mt-2 text-sm text-gray-900pb-2">
           <strong>Instruction: </strong>
-          <p>{{ $subsection->instruction }}</p>
+          <p class="mt-2">{{ $subsection->instruction }}</p>
         </div>
 
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-4 py-3">student ID</th>
