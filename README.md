@@ -22,3 +22,12 @@
 11. Chạy lệnh: php artisan serve
 12. Mở một cửa sổ Terminal khác (click dấu + màu xanh ở góc trái Terminal), chạy lệnh npm run dev
 13. Vào localhost:8000
+
+## Fix không hiện ảnh (avatar, ...)
+
+1. Mở Terminal mới, chạy: cd lms*
+2. Chạy: code .
+3. Mở config/filesystems.php, sửa dòng 'default' =>...'local' thành 'default' => ... 'public'
+4. Tìm file .env, sửa dòng FILESYSTEM_DISK=local thành FILESYSTEM_DISK=public
+5. Chạy lệnh: php artisan storage:link
+6. Chạy lệnh: php artisan config:clear
