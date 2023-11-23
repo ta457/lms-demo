@@ -16,14 +16,14 @@
   {{-- main =================================================== --}}
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
         <div class="mb-6 flex justify-between items-center">
           <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
             {{ $subsection->title }}
           </h3>
         </div>
 
-        <div class="text-sm text-gray-900">
+        <div class="text-sm text-gray-900 dark:text-white">
           @if (\Carbon\Carbon::now()->lt($subsection->deadline))
           <!-- Code to display when the current date is before the model's datetime -->
           <strong>Deadline:
@@ -41,30 +41,32 @@
           @endif
         </div>
 
-        <div class="mt-2 text-sm text-gray-900 border-b border-gray-200 pb-2">
+        <div class="mt-2 text-sm text-gray-900 dark:text-white border-b border-gray-200 pb-2">
           <strong>Instruction: </strong>
           <p>{{ $subsection->instruction }}</p>
         </div>
 
-        <div class="mt-2 text-sm text-gray-900 border-b border-gray-200 pb-2">
+        <div class="mt-2 text-sm text-gray-900 dark:text-white border-b border-gray-200 pb-2">
           <strong>Your submissions: </strong>
           <div class="flex gap-4 mt-2">
             @forelse ($submissions as $submission)
               @if ($submission->student->id == Auth::user()->id)
               <div
-                class="relative hover:bg-gray-300 group flex flex-col gap-2 p-2 block w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24 bg-gray-200 rounded-lg">
+                class="relative hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 group flex flex-col gap-2 p-2 block w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24 bg-gray-200 rounded-lg">
                 <a href="/storage/student-submissions/{{ $submission->file }}" target="_blank"
-                  class="text-sm text-gray-700 w-full hover:font-semibold hover:underline">
+                  class="text-sm text-gray-700 dark:text-gray-400 dark:hover:text-white w-full hover:font-semibold hover:underline">
                   {{ $submission->shortened_file_name }}
                 </a>
                 <div class="flex flex-col justify-center items-center">
-                  <svg class="group-hover:text-gray-700 w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true"
+                  <svg class="group-hover:text-gray-700 w-6 h-6 text-gray-400 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                     <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
                     <path
                       d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Z" />
                   </svg>
-                  <p class="mt-0.5 text-sm font-bold text-gray-700">{{ $submission->file_extension }}</p>
+                  <p class="mt-0.5 text-sm font-bold text-gray-600 dark:text-gray-400 dark:group-hover:text-white">
+                    {{ $submission->file_extension }}
+                  </p>
                 </div>
 
                 <button id="/submission/{{ $submission->id }}"
@@ -83,12 +85,12 @@
           </div>
         </div>
 
-        <div class="mt-2 text-sm text-gray-900">
+        <div class="mt-2 text-sm text-gray-900 dark:text-white">
           <strong>Upload: </strong>
         </div>
         <form action="/assignment/{{ $subsection->id }}" method="POST" enctype="multipart/form-data">
           @csrf
-          <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white"
+          <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white dark:bg-gray-800"
             ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);"
             ondragenter="dragEnterHandler(event);">
             <!-- overlay -->
@@ -107,8 +109,8 @@
             <!-- scroll area -->
             <section class="h-full mt-2 w-full h-full flex flex-col">
               <header
-                class="rounded-lg bg-gray-50 border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
-                <p class="mb-3 font-semibold text-sm text-gray-900 flex flex-wrap justify-center">
+                class="rounded-lg bg-gray-50 dark:bg-gray-900 border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+                <p class="dark:text-gray-200 mb-3 font-semibold text-sm text-gray-900 flex flex-wrap justify-center">
                   <span>Drag and drop your</span>&nbsp;<span>files here or</span>
                 </p>
 
@@ -126,9 +128,13 @@
 
               <ul id="gallery" class="my-3 flex flex-1 flex-wrap -m-1">
                 <li id="empty" class="h-full w-full text-center flex flex-col items-center justify-center items-center">
-                  <img class="mx-auto w-32"
+                  {{-- <img class="mx-auto w-32"
                     src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
-                    alt="no data" />
+                    alt="no data" /> --}}
+                    <svg class="w-16 h-16 mx-auto mt-6 mb-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                      <path d="M5 9V4.13a2.96 2.96 0 0 0-1.293.749L.879 7.707A2.96 2.96 0 0 0 .13 9H5Zm11.066-9H9.829a2.98 2.98 0 0 0-2.122.879L7 1.584A.987.987 0 0 0 6.766 2h4.3A3.972 3.972 0 0 1 15 6v10h1.066A1.97 1.97 0 0 0 18 14V2a1.97 1.97 0 0 0-1.934-2Z"/>
+                      <path d="M11.066 4H7v5a2 2 0 0 1-2 2H0v7a1.969 1.969 0 0 0 1.933 2h9.133A1.97 1.97 0 0 0 13 18V6a1.97 1.97 0 0 0-1.934-2Z"/>
+                    </svg>
                   <span class="text-sm font-semibold text-gray-500">No files selected</span>
                 </li>
               </ul>

@@ -86,8 +86,53 @@ class AdminClassesController extends Controller
         return redirect('/admin-dashboard/classes')->with($message[0],$message[1]);
     }
 
+    public function editClassMembers(CourseClass $class)
+    {   
+        // search & filter
+        $members = $class->members();
+
+        if(request('filter_members') == 'all') {
+            $members = User::oldest();
+        }
+
+        $members = $members->where('role', '>', 1);
+        
+        if(request('sort_by_time') == 'latest') {
+            $members = $members->latest();
+        }
+
+        $members = $members->when(request('search'), function ($query) {
+            return $query->where(function ($query) {
+                $query->where('name', 'like', '%' . request('search') . '%')
+                    ->orWhere('username', 'like', '%' . request('search') . '%');
+            });
+        });
+
+        $members = $members->when(request('filter_role'), function ($query) {
+            return $query->where('role', 'like', '%' . request('filter_role') . '%');
+        });
+
+        $props = [
+            'class' => $class,
+            'users' => $members->paginate(10)
+        ];
+        return view('admin.edit-classMembers', [
+            'props' => $props
+        ]);
+    }
+
     public function updateClassMembers($class, $memberList)
     {
         $class->members()->sync($memberList);
+    }
+
+    public function handleUpdateMemberRequest(Request $request)
+    {   
+        $classId = $request->input('class_id');
+        $selectedUserIds = $request->input('selected', []);
+        $selectedUsers = User::whereIn('id', $selectedUserIds)->get();
+        $this->updateClassMembers(CourseClass::find($classId), $selectedUsers);
+
+        return redirect("/admin-dashboard/classes/$classId/members")->with('success', 'Your changes have been saved');
     }
 }

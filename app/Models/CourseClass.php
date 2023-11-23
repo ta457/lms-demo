@@ -44,4 +44,9 @@ class CourseClass extends Model
         $differenceInDays = $today->diffInDays($createdAt);
         return $differenceInDays;
     }
+
+    public function isUserInClass($userId)
+    {
+        return $this->members()->where('user_id', $userId)->exists();
+    }
 }

@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center w-full">
     <div class="flex gap-4 items-center group">
       <div class="w-10 h-10 rounded-lg bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-        <svg class="w-5 h-5 text-gray-400 dark:text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        <svg class="w-5 h-5 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
           fill="none" viewBox="0 0 18 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M1 2V1h10v1M6 1v12m-2 0h4m3-6V6h6v1m-3-1v7m-1 0h2" />
@@ -27,7 +27,7 @@
     @endif
   </div>
 
-  <div class="px-2 mt-2 ml-4 text-sm text-gray-700 dark:text-gray-300 border-l-2 border-gray-400">
+  <div class="px-2 mt-2 ml-4 text-sm text-gray-700 dark:text-gray-200 border-l-2 border-gray-400">
     {!! $content !!}
   </div>
 </div>

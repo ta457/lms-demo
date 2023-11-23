@@ -162,6 +162,27 @@
     realBtn = document.getElementById('forward-btn-' + id);
     realBtn.click();
   }
+
+  // handle checkboxes in add class member ===========================================
+  function showMemberChangesMessage(text) {
+    let header = document.getElementById('classMembersHeader');
+
+    let existingMessage = document.getElementById('addedMessage');
+    if (existingMessage) {
+      existingMessage.textContent = text;
+      return;
+    }
+
+    let message = document.createElement('h3');
+    message.textContent = text;
+    message.setAttribute('id', 'addedMessage');
+    message.setAttribute('class', 'text-lg font-semibold text-rose-500');
+    header.appendChild(message);
+  }
+  function submitMemberList() {
+    submitBtn = document.getElementById('update-member-btn');
+    submitBtn.click();
+  }
 </script>
 
 </html>

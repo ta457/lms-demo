@@ -117,4 +117,13 @@ Route::middleware('admin')->group(function () {
         '/admin-dashboard/classes/destroy-all',
         [AdminClassesController::class, 'destroyAll']
     );
+    Route::get(
+        '/admin-dashboard/classes/{class}/members',
+        [AdminClassesController::class, 'editClassMembers']
+    );
+
+    Route::patch(
+        '/admin-dashboard/classes/{class}/update-members',
+        [AdminClassesController::class, 'handleUpdateMemberRequest']
+    );
 });
