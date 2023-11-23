@@ -57,51 +57,60 @@ Route::middleware('teacher')->group(function () {
         [SectionController::class, 'storeAssignment']
     )->middleware(['auth', 'verified']);
 
-    //edit, update, delete link subsection
+    //edit, update, delete link subsection =======================================
+
     Route::get(
         '/subsection/{subsection}/edit-link',
         [SectionController::class, 'editLink']
     )->middleware(['auth', 'verified']);
+    
     Route::patch(
-        '/subsection/{subsection}',
+        '/subsection/{subsection}/edit-link',
         [SectionController::class, 'updateLink']
     )->middleware(['auth', 'verified']);
+
     Route::delete(
         '/subsection/{subsection}',
         [SectionController::class, 'destroySubsection']
     )->middleware(['auth', 'verified']);
 
-    //edit, update, delete text subsection
+    //edit, update, delete text subsection ==========================================
+
     Route::get(
         '/subsection/{subsection}/edit-text',
         [SectionController::class, 'editText']
     )->middleware(['auth', 'verified']);
+
     Route::patch(
-        '/subsection/{subsection}',
+        '/subsection/{subsection}/edit-text',
         [SectionController::class, 'updateText']
     )->middleware(['auth', 'verified']);
 
-    //edit, update, delete file subsection
+    //edit, update, delete file subsection =========================================
+
     Route::get(
         '/subsection/{subsection}/edit-file',
         [SectionController::class, 'editFile']
     )->middleware(['auth', 'verified']);
+
     Route::patch(
-        '/subsection/{subsection}',
+        '/subsection/{subsection}/edit-file',
         [SectionController::class, 'updateFile']
     )->middleware(['auth', 'verified']);
 
-    //edit, update, delete assignment subsection
+    //edit, update, delete assignment subsection ====================================
+
     Route::get(
         '/subsection/{subsection}/edit-assignment',
         [SectionController::class, 'editAssignment']
     )->middleware(['auth', 'verified']);
+
     Route::patch(
-        '/subsection/{subsection}',
+        '/subsection/{subsection}/edit-assignment',
         [SectionController::class, 'updateAssignment']
     )->middleware(['auth', 'verified']);
 
-    //view student submissions
+    //view student submissions =====================================================
     Route::get(
         '/assignment/{subsection}/view-submissions',
         [StudenSubmissionController::class, 'index']

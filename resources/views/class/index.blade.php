@@ -5,8 +5,8 @@
 <x-app-layout>
   {{-- header===================================================== --}}
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __($class->course_name . " (Class: " . $class->class_name).")" }}
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
+        {{ __($class->course_name . " (Class: " . $class->class_name) }}
     </h2>
   </x-slot>
 

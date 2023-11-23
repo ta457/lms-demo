@@ -16,9 +16,9 @@
   {{-- sections=================================================== --}}
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
 
-        <div class="text-sm text-gray-900">
+        <div class="text-sm text-gray-900 dark:text-white">
           @if (\Carbon\Carbon::now()->lt($subsection->deadline))
           <!-- Code to display when the current date is before the model's datetime -->
           <strong>Deadline:
@@ -36,13 +36,13 @@
           @endif
         </div>
 
-        <div class="mt-2 text-sm text-gray-900pb-2">
+        <div class="mt-2 text-sm text-gray-900 pb-2 dark:text-white">
           <strong>Instruction: </strong>
           <p class="mt-2">{{ $subsection->instruction }}</p>
         </div>
 
-        <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-100">
+          <thead class="text-xs text-gray-700 dark:text-white uppercase bg-gray-100 dark:bg-gray-800">
             <tr>
               <th scope="col" class="px-4 py-3">student ID</th>
               <th scope="col" class="px-4 py-3">student name</th>
@@ -53,14 +53,14 @@
           <tbody>
             @foreach ($submissions->groupBy('student_id') as $userId => $userSubmissions)
               @foreach ($userSubmissions as $submission)
-              <tr class="border-b bg-gray-50 dark:border-gray-700">
+              <tr class="border-b bg-gray-50 dark:bg-gray-600 dark:border-gray-700">
                 @if ($loop->first)
                 <td class="px-4 py-3" rowspan="{{ $userSubmissions->count() }}">{{ $userId }}</td>
                 <td class="px-4 py-3" rowspan="{{ $userSubmissions->count() }}">{{ $submission->student->name }}</td>
                 @endif
 
                 <td class="px-4 py-3">
-                  <a class="text-primary-600" href="/storage/student-submissions/{{ $submission->file }}" target="_blank">
+                  <a class="text-primary-500 hover:underline" href="/storage/student-submissions/{{ $submission->file }}" target="_blank">
                     {{ $submission->file }}
                   </a>
                 </td>

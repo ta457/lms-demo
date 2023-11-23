@@ -14,11 +14,11 @@
   {{-- sections=================================================== --}}
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
 
         <div class="max-w-2xl px-4 mx-auto">
           <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update subsection</h2>
-          <form action="/subsection/{{ $subsection->id }}" method="POST"  enctype="multipart/form-data">
+          <form action="/subsection/{{ $subsection->id }}/edit-file" method="POST"  enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="grid gap-4 mb-4 sm:grid-cols-2">
@@ -36,19 +36,19 @@
                 </label>
                 <div class="flex gap-4 mt-2">
                   <div
-                    class="w-full relative hover:bg-gray-300 group flex flex-col gap-2 p-2 block md:w-1/4 h-24 bg-gray-200 rounded-lg">
+                    class="w-full relative hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 group flex flex-col gap-2 p-2 block md:w-1/4 h-24 bg-gray-200 rounded-lg">
                     <a href="/storage/{{ $subsection->file }}" target="_blank"
-                      class="text-sm text-gray-700 w-full hover:font-semibold hover:underline">
+                      class="text-sm text-gray-700 dark:text-white w-full hover:font-semibold hover:underline">
                       {{ $subsection->shortened_file_name }}
                     </a>
                     <div class="flex flex-col justify-center items-center">
-                      <svg class="group-hover:text-gray-700 w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true"
+                      <svg class="dark:group-hover:text-gray-200 group-hover:text-gray-700 w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                         <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
                         <path
                           d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Z" />
                       </svg>
-                      <p class="mt-0.5 text-sm font-bold text-gray-700">{{ $subsection->file_extension }}</p>
+                      <p class="mt-0.5 text-sm font-bold text-gray-700 dark:text-white">{{ $subsection->file_extension }}</p>
                     </div>
                   </div>
                 </div>

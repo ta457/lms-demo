@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CourseClass extends Model
 {
@@ -34,5 +35,13 @@ class CourseClass extends Model
         //$result = DB::table('sections')->where('class_id', $id)->get();
         $result = Section::get()->where('class_id', $id);
         return $result;
+    }
+
+    public function getDaysDifferenceAttribute()
+    {
+        $createdAt = Carbon::parse($this->created_at);
+        $today = Carbon::now();
+        $differenceInDays = $today->diffInDays($createdAt);
+        return $differenceInDays;
     }
 }

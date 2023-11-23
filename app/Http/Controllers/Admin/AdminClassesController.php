@@ -13,16 +13,24 @@ class AdminClassesController extends Controller
 {
     public function index()
     {
-        $columns = ['id','class_name', 'course_name'];
+        $classes = CourseClass::oldest();
+        if(request('sort_by_time') == 'latest') {
+            $classes = CourseClass::latest();
+        }
+
+        if(request('search')) {
+            $classes->where('class_name', 'like', '%' . request('search') . '%');
+        }
+        if(request('course_id')) {
+            $classes->where('course_id', 'like', '%' . request('course_id') . '%');
+        }
+
+        //return view
         $props = [
-            'columns' => $columns, 
-            'records' => CourseClass::with('course')->paginate(10), 
-            'courses' => Course::get(),
-            'url' => '/admin-dashboard/classes'
+            'classes' => $classes->paginate(10),
+            'courses' => Course::get()
         ];
-        return view('admin.admin-classes', [
-            'props' => $props
-        ]);
+        return view('admin.admin-classes', ['props' => $props]);
     }
 
     public function store() 
@@ -31,41 +39,51 @@ class AdminClassesController extends Controller
             'class_name' => 'required|max:255',
             'course_id' => 'required',
         ]);
+        $attributes['course_id'] = $attributes['course_id'] * 1;
         CourseClass::create($attributes);
-        return redirect('/admin-dashboard/classes');
+        return redirect('/admin-dashboard/classes')->with('success', 'New class added');
     }
 
-    public function destroy (CourseClass $class)
-    {   
-        DB::delete('delete from class_members where class_id=?', [$class->id]);
-        $class->delete();
-        return redirect('/admin-dashboard/classes');
-    }
-
-    public function edit (CourseClass $class) {
+    public function edit(CourseClass $class) {
         $props = [
             'class' => $class,
-            'delete' => $class,
             'courses' => Course::get(),
-            'users' => User::get(),
-            'members' => $class->members()->paginate(8),
-            'url' => '/admin-dashboard/classes'
+            'members' => $class->members()->paginate(10),
+            'users' => User::get()
         ];
         return view('admin.edit-class', [
             'props' => $props
         ]);
     }
 
-    public function update (CourseClass $class) 
+    public function update(CourseClass $class) 
     {
         $attributes = request()->validate([
             'class_name' => 'required|max:255',
-            'course_id' => 'required',
+            'course_id' => 'required|numeric'
         ]);
-        $selected = request()->input('update-members', []);
-        $this->updateClassMembers($class, $selected);
+        $attributes['course_id'] = $attributes['course_id'] * 1;
         $class->update($attributes);
-        return redirect('/admin-dashboard/classes');
+        return redirect("/admin-dashboard/classes/$class->id")->with('success', 'Your changes have been saved');
+    }
+
+    public function destroy(CourseClass $class)
+    {
+        $class->delete();
+        return redirect('/admin-dashboard/classes')->with('success', 'Class deleted');
+    }
+
+    public function destroyAll(Request $request)
+    {
+        $selectedClasses = $request->input('selected', []);
+        
+        $classes = CourseClass::whereIn('id', $selectedClasses)->get();
+
+        foreach ($classes as $class) {
+            $class->delete();
+        }
+        $message = ['success', 'Selected classes have been deleted'];
+        return redirect('/admin-dashboard/classes')->with($message[0],$message[1]);
     }
 
     public function updateClassMembers($class, $memberList)

@@ -14,11 +14,11 @@
   {{-- sections=================================================== --}}
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
 
         <div class="max-w-2xl px-4 mx-auto">
           <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update subsection</h2>
-          <form action="/subsection/{{ $subsection->id }}" method="POST">
+          <form action="/subsection/{{ $subsection->id }}/edit-assignment" method="POST">
             @csrf
             @method('PATCH')
             <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">

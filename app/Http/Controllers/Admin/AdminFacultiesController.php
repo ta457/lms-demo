@@ -10,11 +10,18 @@ class AdminFacultiesController extends Controller
 {
     public function index()
     {
-        $columns = ['id','faculty_name'];
+        $faculties = Faculty::oldest();
+        if(request('sort_by_time') == 'latest') {
+            $faculties = Faculty::latest();
+        }
+
+        if(request('search')) {
+            $faculties->where('faculty_name', 'like', '%' . request('search') . '%');
+        }
+
+        //return view
         $props = [
-            'records' => Faculty::paginate(10),
-            'columns' => $columns,
-            'url' => '/admin-dashboard/faculties'
+            'faculties' => $faculties->paginate(10)
         ];
         return view('admin.admin-faculties', [
             'props' => $props
@@ -27,14 +34,12 @@ class AdminFacultiesController extends Controller
             'faculty_name' => 'required|max:255'
         ]);
         Faculty::create($attributes);
-        return redirect('/admin-dashboard/faculties');
+        return redirect('/admin-dashboard/faculties')->with('success', 'New faculty added');
     }
 
     public function edit(Faculty $faculty) {
         $props = [
-            'faculty' => $faculty,
-            'delete' => $faculty,
-            'url' => '/admin-dashboard/faculties'
+            'faculty' => $faculty
         ];
         return view('admin.edit-faculty', [
             'props' => $props
@@ -49,13 +54,34 @@ class AdminFacultiesController extends Controller
         if ($faculty->id != 1) {
             $faculty->update($attributes);
         }
-        return redirect('/admin-dashboard/faculties');
+        return redirect("/admin-dashboard/faculties/$faculty->id")->with('success', 'Your changes have been saved');
     }
 
     public function destroy(Faculty $faculty)
     {
-        DB::delete('update courses set faculty_id = 1 where faculty_id = ?', [$faculty->id]);
-        $faculty->delete();
-        return redirect('/admin-dashboard/faculties');
+        if ($faculty->id !== 1) {
+            $faculty->delete();
+            return redirect('/admin-dashboard/faculties')->with('success', 'Faculty deleted');
+        } else {
+            return redirect('/admin-dashboard/faculties')->with('failed', 'Can\'t delete protected record');
+        }
+    }
+
+    public function destroyAll(Request $request)
+    {
+        $selectedFaculties = $request->input('selected', []);
+        
+        $faculties = Faculty::whereIn('id', $selectedFaculties)->get();
+
+        $flag = 0;
+        foreach ($faculties as $faculty) {
+            if ($faculty->id == 1) {
+                $flag = 1; continue;
+            }
+            $faculty->delete();
+        }
+        $message = ['success', 'Selected faculties have been deleted'];
+        if ($flag == 1) $message = ['failed', 'Can\'t delete protected record'];
+        return redirect('/admin-dashboard/faculties')->with($message[0],$message[1]);
     }
 }

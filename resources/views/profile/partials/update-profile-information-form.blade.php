@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information.") }}
         </p>
     </header>
@@ -17,7 +17,7 @@
         @csrf
         @method('patch')
 
-        <div class="card hover:shadow-lg w-full rounded-xl md:shadow-md flex text-gray-900 bg-slate-100">
+        <div class="card hover:shadow-lg w-full rounded-xl md:shadow-md flex text-gray-900 bg-slate-100 dark:bg-gray-900 dark:text-white">
             <x-profile-avatar />
             <div class="py-3 px-6 flex flex-col justify-items-center h-full">
                 <p class="mb-3 text-2xl font-semibold">

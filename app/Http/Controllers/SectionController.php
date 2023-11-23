@@ -116,7 +116,7 @@ class SectionController extends Controller
     }
 
     public function updateText(Subsection $subsection)
-    {
+    {   
         $attributes = request()->validate([
             'title' => 'required|max:255',
             'text_content' => 'required',

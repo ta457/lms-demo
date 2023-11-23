@@ -262,6 +262,10 @@ class DatabaseSeeder extends Seeder
             'faculty_id' => $csFac->id
         ]);
 
+        $unassignedCourse = Course::create([
+            'course_name' => 'Unassigned',
+            'faculty_id' => $default->id
+        ]);
         $da = Course::create([
             'course_name' => 'Cấu trúc dữ liệu & giải thuật',
             'faculty_id' => $csFac->id
