@@ -1,11 +1,19 @@
 <x-app-layout>
-    @if (Auth::user()->role != 1)
+    @if (Auth::user()->role == 2)
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('My courses') }}
+        </h2>
+    </x-slot>
+    @endif
+    @if (Auth::user()->role == 3)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('My classes') }}
         </h2>
     </x-slot>
     @endif
+    
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-6 flex flex-col md:grid md:grid-cols-3">
@@ -15,7 +23,7 @@
                     @else
                     href="/class/{{ $class->id }}/edit"
                     @endif
-                    style=""
+                    id="classLink-{{ $class->id }}"
                     class="h-fit shadow-md drop-shadow-lg relative bg-transparent hover:shadow-xl card max-w-sm rounded-lg
                         dark:bg-gray-800 dark:border-gray-700">
                     <div class="rounded-lg absolute w-full h-full bg-white shadow-sm dark:bg-gray-700 bg-cover bg-center z-0" {{--
@@ -55,9 +63,8 @@
                                     GV: {{ $class->members->where('role', 3)[1]->name ?? '' }}
                                 </span>
                             </div>
-                            <div
-                                class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
-                                More
+                            <div onclick="enterClass({{ $class->id }})" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                                Enter class
                                 <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -71,4 +78,9 @@
             @endforeach
         </div>
     </div>
+    <script>
+        function enterClass(id) {
+            document.getElementById('classLink-' + id).click();
+        }
+    </script>
 </x-app-layout>

@@ -6,9 +6,12 @@
 <x-app-layout>
   {{-- header===================================================== --}}
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __($section->section_title . ' / Edit') }}
-    </h2>
+    <div class="flex items-center">
+      <x-goback-btn href="/class/{{ $section->class->id }}/edit" />
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __($section->section_title . ' / Edit') }}
+      </h2>
+    </div>
   </x-slot>
 
   {{-- sections=================================================== --}}

@@ -5,9 +5,12 @@
 <x-app-layout>
   {{-- header===================================================== --}}
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-        {{ __($class->course_name . " (Class: " . $class->class_name) }}
-    </h2>
+    <div class="flex items-center">
+      <x-goback-btn href="/dashboard" />
+      <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
+          {{ __($class->course_name . " (Class: " . $class->class_name . ")") }}
+      </h2>
+    </div>
   </x-slot>
 
   {{-- sections=================================================== --}}

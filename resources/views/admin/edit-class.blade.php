@@ -21,12 +21,12 @@
 
 <x-admin-layout>
   <x-slot name="header">
-    <div class="flex justify-between items-center">
+    <div class="flex items-center">
+      <x-goback-btn href="/admin-dashboard/classes" />
       <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
           {{ __('Admin Panel / Class ID = ') }}{{ $class->id }}
           <x-header-message />
       </h2>
-      <x-goback-btn href="/admin-dashboard/classes" />
     </div>
   </x-slot>
 

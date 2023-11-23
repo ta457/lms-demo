@@ -8,9 +8,12 @@
 <x-app-layout>
   {{-- header===================================================== --}}
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __($class->course_name." / ".$section->section_title).' / '.$subsection->title }}
-    </h2>
+    <div class="flex items-center">
+      <x-goback-btn href="/class/{{ $class->id }}" />
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        {{ __($section->section_title).' / '.$subsection->title }}
+      </h2>
+    </div>
   </x-slot>
 
   {{-- main =================================================== --}}
