@@ -45,8 +45,13 @@ class AdminUsersController extends Controller
         ]);
         $attributes['role'] = $attributes['role'] * 1;
         $attributes['faculty_id'] = $attributes['faculty_id'] * 1;
-        User::create($attributes);
-        return redirect('/admin-dashboard/users')->with('success', 'New user added');
+        if (!(User::where('username', $attributes['username'])->get()->count() > 0)
+            && !(User::where('email', $attributes['email'])->get()->count() > 0)) {
+            User::create($attributes);
+            return redirect('/admin-dashboard/users')->with('success', 'New user added');
+        } else {
+            return redirect('/admin-dashboard/users')->with('failed', 'Username or Email is already existed');
+        }
     }
 
     public function edit(User $user)

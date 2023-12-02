@@ -15,15 +15,23 @@
 
   {{-- sections=================================================== --}}
   <div class="">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+    <div class="">
+      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg flex gap-4">
         <a href="/class/{{ $class->id }}/members"
-          class="w-fit flex gap-2 items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-          <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
+          class="w-fit flex gap-2 items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+          <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
             <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
             <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z"/>
           </svg>
           Class members
+        </a>
+        <a href="#add-section"
+          class="w-fit flex gap-2 items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+          <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M.188 5H5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707c-.358.362-.617.81-.753 1.3C.148 5.011.166 5 .188 5ZM14 8a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm2 7h-1v1a1 1 0 0 1-2 0v-1h-1a1 1 0 0 1 0-2h1v-1a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2Z"/>
+            <path d="M6 14a7.969 7.969 0 0 1 10-7.737V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H.188A.909.909 0 0 1 0 6.962V18a1.969 1.969 0 0 0 1.933 2h6.793A7.976 7.976 0 0 1 6 14Z"/>
+          </svg>
+          Add a section
         </a>
       </div>
 
@@ -138,78 +146,8 @@
       </div>
       @endforeach
 
-
-      {{-- section template --}}
-      {{-- <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-            Section title
-          </h3>
-        </div>
-        <div class="flex flex-col gap-2">
-          <div class="flex gap-4 items-center">
-            <div class="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 18 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M1 2V1h10v1M6 1v12m-2 0h4m3-6V6h6v1m-3-1v7m-1 0h2" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm font-medium text-gray-900">This is a text sub-section</p>
-            </div>
-          </div>
-
-          <div class="flex gap-4 items-center">
-            <div class="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" viewBox="0 0 16 20">
-                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
-                <path
-                  d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm font-medium text-gray-900">
-                This is a file
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-4 items-center">
-            <div class="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm font-medium text-gray-900">
-                This is a link
-              </p>
-            </div>
-          </div>
-
-          <div class="flex gap-4 items-center">
-            <div class="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center">
-              <svg class="w-6 h-6 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  d="m14.707 4.793-4-4a1 1 0 0 0-1.416 0l-4 4a1 1 0 1 0 1.416 1.414L9 3.914V12.5a1 1 0 0 0 2 0V3.914l2.293 2.293a1 1 0 0 0 1.414-1.414Z" />
-                <path
-                  d="M18 12h-5v.5a3 3 0 0 1-6 0V12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm font-medium text-gray-900">Student submission sub-section</p>
-            </div>
-          </div>
-        </div>
-      </div> --}}
-
       {{-- add section form --}}
-      <div class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+      <div id="add-section" class="mb-4 p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
         <form id="add-section-form" class="hidden" action="/class/{{ $class->id }}/edit" method="POST">
           @csrf
           <div class="max-w-xl">

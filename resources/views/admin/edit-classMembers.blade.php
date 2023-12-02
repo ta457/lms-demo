@@ -25,6 +25,9 @@
       <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
         Class members
       </h3>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+        Total: {{ $class->members->count() }}
+      </h3>
     </div>
     <!-- table header----------------------------------------------------------- -->
     <div class="overflow-auto">

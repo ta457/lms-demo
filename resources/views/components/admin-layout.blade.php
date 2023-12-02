@@ -25,7 +25,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased flex h-screen bg-gray-100 dark:bg-gray-900"
+<body class="font-sans antialiased flex h-screen bg-gray-200 dark:bg-gray-900"
   style="{{ Str::contains(request()->route()->uri,'admin-dashboard') ? 'overflow:hidden;' : ''}}">
   <!-- Sidebar -->
   <x-admin-sidebar :active="request()->route()->uri" />

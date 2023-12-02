@@ -16,7 +16,7 @@
     
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-6 flex flex-col md:grid md:grid-cols-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-6 flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3">
             @foreach ($classes as $class)
                 <a @if (Auth::user()->role == 2)
                     href="/class/{{ $class->id }}"
@@ -24,14 +24,11 @@
                     href="/class/{{ $class->id }}/edit"
                     @endif
                     id="classLink-{{ $class->id }}"
-                    class="h-fit shadow-md drop-shadow-lg relative bg-transparent hover:shadow-xl card max-w-sm rounded-lg
+                    class="card h-fit shadow-lg drop-shadow-lg relative bg-white hover:shadow-xl max-w-sm rounded-lg
                         dark:bg-gray-800 dark:border-gray-700">
-                    <div class="rounded-lg absolute w-full h-full bg-white shadow-sm dark:bg-gray-700 bg-cover bg-center z-0" {{--
-                        style="background-image: url('/img/course_bg.jpg'); filter:brightness(50%);" --}}>
-                    </div>
                     <div class="relative p-4 z-10 text-gray-900 dark:text-gray-200">
-                        <div class="flex justify-between items-center mb-5">
-                            <span
+                        <div class="flex justify-between items-center mb-2">
+                            {{-- <span
                                 class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                                 <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +38,9 @@
                                 </svg>
                                 Tutorial
                             </span>
-                            <span class="text-sm">{{ $class->days_difference }} days ago</span>
+                            <span class="text-sm">{{ $class->days_difference }} days ago</span> --}}
+                            <img class="w-full rounded-lg filter dark:brightness-75" 
+                                src="/img/Sierra.jpg" alt="">
                         </div>
                         <h2 class="mb-2 text-2xl font-semibold tracking-tight dark:text-gray-200">
                             {{ $class->course->course_name }}
@@ -64,7 +63,7 @@
                                 </span>
                             </div>
                             <div onclick="enterClass({{ $class->id }})" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
-                                Enter class
+                                Enter
                                 <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"

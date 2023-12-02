@@ -25,38 +25,58 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased flex h-screen bg-gray-100 dark:bg-gray-900"
+<body class="font-sans antialiased flex h-screen bg-gray-200 dark:bg-gray-900"
   style="{{ Str::contains(request()->route()->uri,'admin-dashboard') ? 'overflow:hidden;' : ''}}">
-  <!-- Sidebar -->
-  {{-- <x-admin-sidebar :active="request()->route()->uri" /> --}}
 
-  <div class="flex-1 flex flex-col overflow-hidden">
-    {{-- Top navbar --}}
-    @include('layouts.navigation')
-
-    <!-- Page Heading -->
-    @if (isset($header))
-    <div id="site-header" class="z-10 w-full bg-white dark:bg-gray-800 shadow">
-      <header class="w-full lg:w-5/6 px-2 lg:px-32">
-        <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          {{ $header }}
-        </div>
-      </header>
+  <div class="w-full h-screen md:grid" style="grid-template-columns: 16rem 1fr;">
+    <div class="w-64">
+      <x-user-sidebar>
+        <x-user-sidebar-item 
+          :active="true"
+          href=""
+          text="My classes"
+        />
+      </x-user-sidebar>
     </div>
-    @endif
+    <div class="h-full flex-1 flex flex-col overflow-hidden">
+      {{-- Top navbar --}}
+      @include('layouts.navigation')
 
-    <!-- Page Content -->
-    <main id="site-main" class="pt-4 pb-4 sm:px-6 sm:pt-6 flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900">
-      <div class="w-full mx-auto lg:w-5/6 mt-20 pt-2 px-4 sm:px-4 sm:pt-4">
-        {{ $slot }}
+      <!-- Page Heading -->
+      @if (isset($header))
+      <div id="site-header" class="z-10 w-full bg-white dark:bg-gray-800 shadow">
+        <header class="w-full lg:w-5/6 px-2 ">
+          <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $header }}
+          </div>
+        </header>
       </div>
-      {{-- paginate --}}
-      @if (isset($data))
-        <div id="admin-paginate" class="w-full lg:w-5/6 mt-4 px-4 dark:text-white">
-          {{ $data->links() }}
-        </div>
       @endif
-    </main>
+
+      <!-- Page Content -->
+      <main id="site-main" class="pt-4 pb-4 sm:pt-6 flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900">
+        {{-- @if (!Str::contains(request()->route()->uri,'dashboard')) --}}
+          <div class="w-full grid grid-cols-4 mt-20 pt-2 px-4 sm:px-4 sm:pt-4">
+            <div class="col-span-4 xl:col-span-3">
+            {{ $slot }}
+            </div>
+          </div>
+        {{-- @else
+          <div class="w-full mt-20 pt-2 px-4 sm:px-4 sm:pt-4">
+            <div class="">
+            {{ $slot }}
+            </div>
+          </div>
+        @endif --}}
+        
+        {{-- paginate --}}
+        @if (isset($data))
+          <div id="admin-paginate" class="w-full lg:w-5/6 mt-4 px-4 dark:text-white">
+            {{ $data->links() }}
+          </div>
+        @endif
+      </main>
+    </div>
   </div>
 </body>
 

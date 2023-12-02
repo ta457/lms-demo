@@ -33,8 +33,12 @@ class AdminFacultiesController extends Controller
         $attributes = request()->validate([
             'faculty_name' => 'required|max:255'
         ]);
-        Faculty::create($attributes);
-        return redirect('/admin-dashboard/faculties')->with('success', 'New faculty added');
+        if (!(Faculty::where('faculty_name', $attributes['faculty_name'])->get()->count() > 0)) {
+            Faculty::create($attributes);
+            return redirect('/admin-dashboard/faculties')->with('success', 'New faculty added');
+        } else {
+            return redirect('/admin-dashboard/faculties')->with('failed', 'Faculty name\'s already existed');
+        }
     }
 
     public function edit(Faculty $faculty) {

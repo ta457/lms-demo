@@ -31,12 +31,10 @@ class CourseClassController extends Controller
 
   public function store(CourseClass $class)
   {
-    //dd(request()->section_title);
     $attributes = request()->validate([
       'section_title' => 'required|max:255',
       'class_id' => 'required|integer',
     ]);
-    //dd($attributes);
     Section::create($attributes);
     $url = '/class/' . $class->id . '/edit';
     return redirect($url);

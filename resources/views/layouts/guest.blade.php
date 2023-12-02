@@ -34,27 +34,27 @@
                 document.documentElement.classList.remove('dark')
             }
         </script>
-        <div class="absolute right-0 mt-2 mr-2 sm:mt-5 sm:mr-5">
+        <div class="z-10 absolute right-0 mt-2 mr-2 sm:mt-5 sm:mr-5">
             <x-theme-toggle-btn />
         </div>
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            {{-- <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div> --}}
+        <div class="relative min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             {{-- <div id="guestBg"></div> --}}
-            {{-- <img class="w-screen h-screen object-cover" src="/img/Sierra.jpg" alt=""> --}}
             
-            <div>
-                <a href="/" class="flex flex-col items-center">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                    <p class="ml-2 text-2xl font-bold text-gray-600 dark:text-gray-200">LMS</p>
+            <div class="z-10">
+                <a href="/" class="flex items-center">
+                    <x-application-logo class="w-14 h-14 fill-current text-white" />
+                    <p class="ml-2 text-3xl font-bold text-white">LMS</p>
                 </a>
             </div>
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="z-10 w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+                <h2 class="text-gray-900 dark:text-white text-2xl font-bold mb-6">
+                    Log in
+                </h2>
                 {{ $slot }}
             </div>
+
+            <img class="z-0 absolute w-screen h-screen object-cover filter brightness-75 dark:brightness-50" 
+                src="/img/Sierra.jpg" alt="">
         </div>
     </body>
 </html>

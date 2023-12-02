@@ -267,7 +267,7 @@ class DatabaseSeeder extends Seeder
             'faculty_id' => $default->id
         ]);
         $da = Course::create([
-            'course_name' => 'Cấu trúc dữ liệu & giải thuật',
+            'course_name' => 'CTDL & giải thuật',
             'faculty_id' => $csFac->id
         ]);
             $da1 = CourseClass::create([
