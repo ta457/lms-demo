@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,8 +18,20 @@ class AuthenticatedSessionController extends Controller
      * Display the login view.
      */
     public function create(): View
-    {
-        return view('auth.login');
+    {   
+        $files = Storage::files("login-background");
+
+        $backgroundExtension = null;
+
+        if (!empty($files)) {
+            $firstFile = $files[0];
+            $backgroundExtension = pathinfo($firstFile, PATHINFO_EXTENSION);
+        }
+
+        $props = [
+            'backgroundExtension' => $backgroundExtension
+        ];
+        return view('auth.login', ['props' => $props]);
     }
 
     /**

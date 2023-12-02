@@ -1,4 +1,22 @@
-<x-guest-layout>
+@props([
+  'backgroundExtension' => $props['backgroundExtension']
+])
+
+<x-guest-layout src="{{ $backgroundExtension }}">
+    <x-slot name="loginBg">
+        @if (is_null($backgroundExtension))
+            <img 
+                class="z-0 absolute w-screen h-screen object-cover filter brightness-75 dark:brightness-50" 
+                src="/img/background.jpg" alt="bg"
+            >
+        @else
+            <img 
+                class="z-0 absolute w-screen h-screen object-cover filter brightness-75 dark:brightness-50" 
+                src="/storage/login-background/background.{{ $backgroundExtension }}" alt="bg"
+            >
+        @endif
+    </x-slot>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

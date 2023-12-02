@@ -53,8 +53,7 @@
                 {{ $slot }}
             </div>
 
-            <img class="z-0 absolute w-screen h-screen object-cover filter brightness-75 dark:brightness-50" 
-                src="/img/Sierra.jpg" alt="">
+            {{ $loginBg }}
         </div>
     </body>
 </html>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\AdminFacultiesController;
 use App\Http\Controllers\Admin\AdminCoursesController;
 use App\Http\Controllers\Admin\AdminClassesController;
+use App\Http\Controllers\AdminSettingController;
 
 //admin-dashboard routes
 Route::middleware('admin')->group(function () {
@@ -125,5 +126,16 @@ Route::middleware('admin')->group(function () {
     Route::patch(
         '/admin-dashboard/classes/{class}/update-members',
         [AdminClassesController::class, 'handleUpdateMemberRequest']
+    );
+
+    // Admin settings
+
+    Route::get(
+        '/admin-dashboard/settings',
+        [AdminSettingController::class, 'index']
+    );
+    Route::patch(
+        '/admin-dashboard/settings',
+        [AdminSettingController::class, 'update']
     );
 });
