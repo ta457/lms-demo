@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminCoursesController extends Controller
 {
@@ -65,6 +65,18 @@ class AdminCoursesController extends Controller
         ]);
         $attributes['faculty_id'] = $attributes['faculty_id'] * 1;
         $course->update($attributes);
+
+        if (request()->img) {
+            $attributes = request()->validate([
+                'img' => 'image|max:2048'
+            ]);
+            $attributes['img'] = request()->file('img')->store('courses-bg');
+            if($course->img) {
+                Storage::delete($course->img);
+            }
+            $course->update($attributes);
+        }
+
         return redirect("/admin-dashboard/courses/$course->id")->with('success', 'Your changes have been saved');
     }
 

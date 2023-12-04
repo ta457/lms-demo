@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('course_name');
             $table->foreignId('faculty_id');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

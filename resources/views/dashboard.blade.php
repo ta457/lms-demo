@@ -9,7 +9,7 @@
     @if (Auth::user()->role == 3)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('My classes') }}
+            {{ __('My courses') }}
         </h2>
     </x-slot>
     @endif
@@ -39,8 +39,15 @@
                                 Tutorial
                             </span>
                             <span class="text-sm">{{ $class->days_difference }} days ago</span> --}}
-                            <img class="w-full rounded-lg filter dark:brightness-75" 
-                                src="/img/Sierra.jpg" alt="">
+                            
+                            @if (is_null($class->course->img))
+                                <img class="w-full h-44 rounded-lg filter dark:brightness-75" 
+                                    src="/storage/courses-bg/default.jpg" alt="course-bg">
+                            @else
+                                <img class="w-full h-44 rounded-lg filter dark:brightness-75" 
+                                    src="/storage/{{ $class->course->img }}" alt="course-bg">
+                            @endif
+                            
                         </div>
                         <h2 class="mb-2 text-2xl font-semibold tracking-tight dark:text-gray-200">
                             {{ $class->course->course_name }}

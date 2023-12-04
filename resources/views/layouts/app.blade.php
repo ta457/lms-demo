@@ -41,7 +41,7 @@
         <x-user-sidebar-item 
           :active="true"
           href=""
-          text="My classes"
+          text="My courses"
         />
       </x-user-sidebar>
     </div>

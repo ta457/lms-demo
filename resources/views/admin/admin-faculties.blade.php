@@ -17,7 +17,8 @@
 
   {{-- Table body ------------------------------------------------------------ --}}
   <div class="overflow-x-auto">
-    <x-admin-table-body action='/admin-dashboard/faculties' :heads="['ID','Faculty']">
+    <x-admin-table-body action='/admin-dashboard/faculties/destroy-all' 
+      :heads="['ID','Faculty']">
       <tbody>
         @foreach ($faculties as $faculty)
         <tr class="border-b dark:border-gray-700">

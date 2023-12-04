@@ -34,7 +34,9 @@
 
   {{-- Table body ------------------------------------------------------------ --}}
   <div class="overflow-x-auto">
-    <x-admin-table-body action='/admin-dashboard/users' :heads="['ID','Name','Username','Email','Role','Faculty']">
+    <x-admin-table-body 
+      action='/admin-dashboard/users/destroy-all' 
+      :heads="['ID','Name','Username','Email','Role','Faculty']">
       <tbody>
         @foreach ($users as $user)
         <tr class="border-b dark:border-gray-700">
