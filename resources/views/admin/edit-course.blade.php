@@ -80,12 +80,10 @@
           
           @if (is_null($course->img))
             <img class="max-w-md rounded-lg" 
-              src="/storage/courses-bg/default.jpg" alt="course-bg"
-            >
+              src="/storage/courses-bg/default.jpg" alt="course-bg">
           @else
             <img class="max-w-md rounded-lg" 
-              src="/storage/{{ $course->img }}" alt="course-bg"
-            >
+              src="/storage/{{ $course->img }}" alt="course-bg">
           @endif
           <input type="file" name="img" id="img"
             class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">

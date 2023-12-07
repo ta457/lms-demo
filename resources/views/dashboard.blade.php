@@ -1,20 +1,9 @@
 <x-app-layout>
-    @if (Auth::user()->role == 2)
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('My courses') }}
         </h2>
     </x-slot>
-    @endif
-    @if (Auth::user()->role == 3)
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('My courses') }}
-        </h2>
-    </x-slot>
-    @endif
-    
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-6 flex flex-col md:grid md:grid-cols-2 xl:grid-cols-3">
             @foreach ($classes as $class)

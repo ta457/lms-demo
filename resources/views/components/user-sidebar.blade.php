@@ -10,7 +10,12 @@
     </a>
     <div class="px-4">
       <ul class="space-y-2">
-        {{ $slot }}
+        <x-admin-sidebar-item 
+          :active="Str::contains(request()->route()->uri, 'dashboard')"
+          href="/dashboard"
+          label="My Courses">
+          <x-icon-course :active="Str::contains(request()->route()->uri, 'dashboard')" />
+        </x-admin-sidebar-item>
       </ul>
     </div>
   </div>

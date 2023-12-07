@@ -33,18 +33,12 @@
       class="w-full h-screen md:grid" style="grid-template-columns: 16rem 1fr;"
     @else
       class="w-full h-screen flex justify-items-center"
-    @endif
-  >
+    @endif>
+    
     @if (!Str::contains(request()->route()->uri,'profile'))
-    <div class="w-64">
-      <x-user-sidebar>
-        <x-user-sidebar-item 
-          :active="true"
-          href=""
-          text="My courses"
-        />
-      </x-user-sidebar>
-    </div>
+      <div class="w-64">
+        <x-user-sidebar />
+      </div>
     @endif
 
     <div class="h-full flex-1 flex flex-col overflow-hidden">
@@ -64,25 +58,16 @@
 
       <!-- Page Content -->
       <main id="site-main" class="pt-4 pb-4 sm:pt-6 flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900">
-        {{-- @if (!Str::contains(request()->route()->uri,'dashboard')) --}}
-          <div 
-            @if (!Str::contains(request()->route()->uri,'profile'))
-              class="w-full grid grid-cols-4 mt-20 pt-2 px-4 sm:px-4 sm:pt-4"
-            @else
-              class="pt-12"
-            @endif
-          >
-            <div class="col-span-4 xl:col-span-3">
-            {{ $slot }}
-            </div>
+        <div 
+          @if (!Str::contains(request()->route()->uri,'profile'))
+            class="w-full grid grid-cols-4 mt-20 pt-2 px-4 sm:px-4 sm:pt-4"
+          @else
+            class="pt-12"
+          @endif>
+          <div class="col-span-4 xl:col-span-3">
+          {{ $slot }}
           </div>
-        {{-- @else
-          <div class="w-full mt-20 pt-2 px-4 sm:px-4 sm:pt-4">
-            <div class="">
-            {{ $slot }}
-            </div>
-          </div>
-        @endif --}}
+        </div>
         
         {{-- paginate --}}
         @if (isset($data))
