@@ -24,7 +24,6 @@ use App\Http\Controllers\StudenSubmissionController;
 //     return view('welcome');
 // })->name('home');
 
-//if it's a guess, always open login page
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
@@ -48,19 +47,6 @@ Route::get(
     [CourseClassController::class, 'index']
 )->middleware(['auth', 'verified']);
 
-Route::get(
-    '/assignment/{subsection}',
-    [StudenSubmissionController::class, 'index']
-)->middleware(['auth', 'verified']);
-Route::post(
-    '/assignment/{subsection}',
-    [StudenSubmissionController::class, 'store']
-)->middleware(['auth', 'verified']);
-Route::delete(
-    '/submission/{submission}',
-    [StudenSubmissionController::class, 'destroy']
-)->middleware(['auth', 'verified']);
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -70,3 +56,4 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/teacher.php';
+require __DIR__ . '/student.php';

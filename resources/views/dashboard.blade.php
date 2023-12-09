@@ -44,7 +44,7 @@
                         <p class="mb-5 text-gray-900 dark:text-gray-200">
                             Class: {{ $class->class_name }}
                         </p>
-                        <div class="flex justify-between items-center">
+                        <div class="flex gap-4 justify-between">
                             <div class="flex items-center space-x-4">
                                 <div
                                     class="ring-2 ring-gray-300 dark:ring-gray-500 relative w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
