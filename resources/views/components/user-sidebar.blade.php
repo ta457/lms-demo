@@ -16,6 +16,13 @@
           label="My Courses">
           <x-icon-course :active="Str::contains(request()->route()->uri, 'dashboard')" />
         </x-admin-sidebar-item>
+
+        <x-admin-sidebar-item 
+          :active="Str::contains(request()->route()->uri, 'schedule')"
+          href="/schedule/{{ Auth::user()->id }}"
+          label="My Schedule">
+          <x-icon-schedule :active="Str::contains(request()->route()->uri, 'schedule')" />
+        </x-admin-sidebar-item>
       </ul>
     </div>
   </div>

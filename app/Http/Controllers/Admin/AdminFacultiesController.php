@@ -64,6 +64,11 @@ class AdminFacultiesController extends Controller
     public function destroy(Faculty $faculty)
     {
         if ($faculty->id !== 1) {
+            //reassign all courses to faculty 1
+            $courses = $faculty->courses;
+            foreach ($courses as $course) {
+                $course->update(['faculty_id' => 1]);
+            }
             $faculty->delete();
             return redirect('/admin-dashboard/faculties')->with('success', 'Faculty deleted');
         } else {
@@ -82,7 +87,7 @@ class AdminFacultiesController extends Controller
             if ($faculty->id == 1) {
                 $flag = 1; continue;
             }
-            $faculty->delete();
+            $this->destroy($faculty);
         }
         $message = ['success', 'Selected faculties have been deleted'];
         if ($flag == 1) $message = ['failed', 'Can\'t delete protected record'];

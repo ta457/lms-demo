@@ -8,6 +8,7 @@ use App\Models\ClassMembers;
 use App\Models\Course;
 use App\Models\CourseClass;
 use App\Models\Faculty;
+use App\Models\Schedule;
 use App\Models\Section;
 use App\Models\Subsection;
 use App\Models\User;
@@ -270,9 +271,15 @@ class DatabaseSeeder extends Seeder
             'course_name' => 'CTDL & giải thuật',
             'faculty_id' => $csFac->id
         ]);
+            $da1Schedule = Schedule::create([
+                'day_of_week' => 1,
+                'start_period' => 1,
+                'end_period' => 3
+            ]);
             $da1 = CourseClass::create([
                 'course_id' => $da->id,
-                'class_name' => 'CTDLGT 1'
+                'class_name' => 'CTDLGT 1',
+                'schedule_id' => $da1Schedule->id
             ]);
                 ClassMembers::create([
                     'class_id' => $da1->id,
@@ -282,9 +289,15 @@ class DatabaseSeeder extends Seeder
                     'class_id' => $da1->id,
                     'user_id' => $teacher1->id
                 ]);
+            $da2Schedule = Schedule::create([
+                'day_of_week' => 2,
+                'start_period' => 3,
+                'end_period' => 5
+            ]);
             $da2 = CourseClass::create([
                 'course_id' => $da->id,
-                'class_name' => 'CTDLGT 2'
+                'class_name' => 'CTDLGT 2',
+                'schedule_id' => $da2Schedule->id
             ]);
                 ClassMembers::create([
                     'class_id' => $da2->id,
@@ -299,9 +312,15 @@ class DatabaseSeeder extends Seeder
             'course_name' => 'Công nghệ Web',
             'faculty_id' => $csFac->id
         ]);
+            $web1Schedule = Schedule::create([
+                'day_of_week' => 3,
+                'start_period' => 1,
+                'end_period' => 3
+            ]);
             $web1 = CourseClass::create([
                 'course_id' => $web->id,
-                'class_name' => 'Web 1'
+                'class_name' => 'Web 1',
+                'schedule_id' => $web1Schedule->id
             ]);
                 ClassMembers::create([
                     'class_id' => $web1->id,
@@ -316,9 +335,15 @@ class DatabaseSeeder extends Seeder
             'course_name' => 'Cơ sở dữ liệu',
             'faculty_id' => $mathFac->id
         ]);
+            $db1Schedule = Schedule::create([
+                'day_of_week' => 4,
+                'start_period' => 1,
+                'end_period' => 3
+            ]);
             $db1 = CourseClass::create([
                 'course_id' => $db->id,
-                'class_name' => 'CSDL 1'
+                'class_name' => 'CSDL 1',
+                'schedule_id' => $db1Schedule->id
             ]);
                 ClassMembers::create([
                     'class_id' => $db1->id,
@@ -328,9 +353,15 @@ class DatabaseSeeder extends Seeder
                     'class_id' => $db1->id,
                     'user_id' => $teacher1->id
                 ]);
+            $db2Schedule = Schedule::create([
+                'day_of_week' => 5,
+                'start_period' => 3,
+                'end_period' => 5
+            ]);
             $db2 = CourseClass::create([
                 'course_id' => 2,
-                'class_name' => 'CSDL 2'
+                'class_name' => 'CSDL 2',
+                'schedule_id' => $db2Schedule->id
             ]);
                 ClassMembers::create([
                     'class_id' => $db2->id,

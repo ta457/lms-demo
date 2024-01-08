@@ -54,7 +54,7 @@
           <x-icon-setting :active="Str::contains(request()->route()->uri, '/settings')" />
         </x-admin-sidebar-item>
         
-        <li>
+        {{-- <li>
           <a href=""
             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
             <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" 
@@ -63,7 +63,7 @@
             </svg>
             <span class="ml-3">Logs</span>
           </a>
-        </li>
+        </li> --}}
       </ul>
     </div>
   </div>

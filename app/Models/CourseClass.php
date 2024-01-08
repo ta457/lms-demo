@@ -49,4 +49,10 @@ class CourseClass extends Model
     {
         return $this->members()->where('user_id', $userId)->exists();
     }
+
+    //each class has one schedule
+    public function schedule()
+    {
+        return $this->hasOne(Schedule::class, 'id');
+    }
 }

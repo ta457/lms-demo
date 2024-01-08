@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('course_name');
-            $table->foreignId('faculty_id');
-            $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
-            $table->string('img')->nullable();
+            $table->unsignedSmallInteger('day_of_week');
+            $table->unsignedSmallInteger('start_period');
+            $table->unsignedSmallInteger('end_period');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('schedules');
     }
 };

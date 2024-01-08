@@ -53,7 +53,9 @@
                 {{ $slot }}
             </div>
 
-            {{ $loginBg }}
+            @if (isset($loginBg))
+                {{ $loginBg }}
+            @endif
         </div>
     </body>
 </html>

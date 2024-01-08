@@ -71,4 +71,30 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\StudenSubmission', 'student_id');
     }
+
+    public function getTimelineAttribute() {
+        $classes = $this->classes;
+        //create an empty array of 50 elements
+        $timeline = array_fill(0, 51, null);
+        //foreach class, get the real start and end period, and fill the timeline array
+        foreach ($classes as $class) {
+            $schedule = $class->schedule;
+            $start = $schedule->real_start_period;
+            $end = $schedule->real_end_period;
+            for ($i = $start; $i <= $end; $i++) {
+                $timeline[$i] = [$end - $start + 1, $class];
+            }
+        }
+        return $timeline;
+    }
+
+    public function isBusy($day, $start, $end) {
+        $timeline = $this->timeline;
+        for ($i = $start; $i <= $end; $i++) {
+            if ($timeline[$day * 10 - 10 + $i] != null) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

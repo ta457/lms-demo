@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CourseClassController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudenSubmissionController;
 
@@ -41,6 +42,11 @@ Route::get(
     '/dashboard',
     [DashboardController::class, 'index']
 )->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get(
+    '/schedule/{user}',
+    [ScheduleController::class, 'index']
+)->middleware(['auth', 'verified']);
 
 Route::get(
     '/class/{class}',

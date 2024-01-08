@@ -83,6 +83,11 @@ class AdminCoursesController extends Controller
     public function destroy(Course $course)
     {
         if ($course->id !== 1) {
+            //reassign all classes to course 1
+            $classes = $course->classes;
+            foreach ($classes as $class) {
+                $class->update(['course_id' => 1]);
+            }
             $course->delete();
             return redirect('/admin-dashboard/courses')->with('success', 'Course deleted');
         } else {
@@ -101,7 +106,7 @@ class AdminCoursesController extends Controller
             if ($course->id == 1) {
                 $flag = 1; continue;
             }
-            $course->delete();
+            $this->destroy($course);
         }
         $message = ['success', 'Selected courses have been deleted'];
         if ($flag == 1) $message = ['failed', 'Can\'t delete protected record'];

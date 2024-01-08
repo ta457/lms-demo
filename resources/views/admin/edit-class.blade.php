@@ -14,6 +14,7 @@
 
 @props([
 'class' => $props['class'],
+'schedule' => $props['class']->schedule,
 'courses' => $props['courses'],
 'members' => $props['members'],
 'users' => $props['users']
@@ -76,6 +77,49 @@
                 {{ $course->course_name }}
               </option>         
             @endforeach
+          </select>
+        </div>
+        <div>
+          <label for="day_of_week" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Day of week</label>
+          <select id="day_of_week" name="day_of_week"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option @if ($schedule->day_of_week == 1) @selected(true) @endif value="1">Monday</option>
+            <option @if ($schedule->day_of_week == 2) @selected(true) @endif value="2">Tuesday</option>
+            <option @if ($schedule->day_of_week == 3) @selected(true) @endif value="3">Wednesday</option>
+            <option @if ($schedule->day_of_week == 4) @selected(true) @endif value="4">Thursday</option>
+            <option @if ($schedule->day_of_week == 5) @selected(true) @endif value="5">Friday</option>
+          </select>
+        </div>
+        <div>
+          <label for="start_period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start period</label>
+          <select id="start_period" name="start_period"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option @if ($schedule->start_period == 1) @selected(true) @endif value="1">1</option>
+            <option @if ($schedule->start_period == 2) @selected(true) @endif value="2">2</option>
+            <option @if ($schedule->start_period == 3) @selected(true) @endif value="3">3</option>
+            <option @if ($schedule->start_period == 4) @selected(true) @endif value="4">4</option>
+            <option @if ($schedule->start_period == 5) @selected(true) @endif value="5">5</option>
+            <option @if ($schedule->start_period == 6) @selected(true) @endif value="6">6</option>
+            <option @if ($schedule->start_period == 7) @selected(true) @endif value="7">7</option>
+            <option @if ($schedule->start_period == 8) @selected(true) @endif value="8">8</option>
+            <option @if ($schedule->start_period == 9) @selected(true) @endif value="9">9</option>
+            <option @if ($schedule->start_period == 10) @selected(true) @endif value="10">10</option>
+          </select>
+        </div>
+        <div>
+          <label for="end_period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End period</label>
+          <select id="end_period" name="end_period"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+            <option @if ($schedule->end_period == 1) @selected(true) @endif value="1">1</option>
+            <option @if ($schedule->end_period == 2) @selected(true) @endif value="2">2</option>
+            <option @if ($schedule->end_period == 3) @selected(true) @endif value="3">3</option>
+            <option @if ($schedule->end_period == 4) @selected(true) @endif value="4">4</option>
+            <option @if ($schedule->end_period == 5) @selected(true) @endif value="5">5</option>
+            <option @if ($schedule->end_period == 6) @selected(true) @endif value="6">6</option>
+            <option @if ($schedule->end_period == 7) @selected(true) @endif value="7">7</option>
+            <option @if ($schedule->end_period == 8) @selected(true) @endif value="8">8</option>
+            <option @if ($schedule->end_period == 9) @selected(true) @endif value="9">9</option>
+            <option @if ($schedule->end_period == 10) @selected(true) @endif value="10">10</option>
           </select>
         </div>
       </div>
